@@ -1,0 +1,74 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Set cover} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Greedy Approach~(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] A universe of elements $V = \{ e_1, ..., e_n\}$, and a list of sets $\{S_i \subset V\}_{i=1}^m$
+\item [Complexity:] $\mathcal{O}(mn\cdot \min(n, m))$
+\item [Data structure compatibility:] data structure set can be used with the algorithm
+\item [Common applications:] facility location selection in industry
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	Give A universe of elements $V = \{ e_1, ..., e_n\}$, and a list of sets $\{S_i \subset V\}_{i=1}^m$, we want to cover all the elements in universe V with minimal number of sets from the set list.
+\end{problem}
+
+\subsection*{Description}
+Detailed definition of the problem. Assume we have a universe of elements $V = \{ e_1, ..., e_n\}$, we assume there are a list of non-empty sets $\{S_i \subset V\}_{i=1}^m$, we would like to find out a number of sets $\{T_i\}$ out of the universe V, such that the universe V is equal to the union of them, namely $V = \cup_{i=1}^{j}T_i$. There are many variations of this problem, we can also set cost to each set(a specific number rather than 1). However, the idea does not change much, we only need to modify the greedy algorithm a little bit. Set cover problem is also related to max coverage and vertex coverage problems.\newline
+
+Set cover is a classic NP problem in the field of mathematics and operations research. Unless we can prove $N = NP$, we can not derive an algorithm that can find the exact solution to the problem within polynomial time\cite{ve477}. So a natural trade-off will lie between time complexity and accuracy. In our case, the time complexity is more critical. To deal with the time complexity, we have to sacrifice the accuracy and use approximate algorithm.\newline
+
+Another perspective is the usage of greedy algorithm. In algorithm design, the big picture is that greedy algorithm, local search, and LP-relaxation are three main strategies that deal with most NP-hard problems\cite{vg441}. So brute force these three methods before using fancy technique. To enjoy more about approximate algorithms, read \emph{the Design of Approximate Algorithms}\cite{williamson2011design} and you will gain a lot.\newline
+
+The key idea in this algorithm is to be greedy, trying to choose the set that covers largest number of elements. Here we assume $H_{n}=1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}$, and we can tell $H_{n} \approx \ln n$, which is taught in basic calculus course. Our algorithm is an $H_n-$ approximate algorithm that solves the set cover problem. The detailed proof is beyond the scope of this course(sadly engineers does not share the beauty of mathematics).\newline
+
+Also we have to consider the time complexity for our algorithm. For this simple version of greedy algorithm. We can eliminate at least one element from the set U or we can take it as one set from the set list $\{S_i \subset V\}_{i=1}^m$, so there are at most $\min(n, m)$ loops for the while(not less because of the case that each set $S_i$ has exactly one element). Within each loop, there are $\mathcal{O}(mn)$ operations for the argmax operation. So the total time complexity is $\mathcal{O}(mn\cdot \min(n, m))$. In the exercise problem in Introduction to Algorithm, we can modify the algorithm to make it linear for argmax.
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Greedy Approach\label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{A universe of elements $V = \{ e_1, ..., e_n\}$, a list of sets $\{S_i \subset V\}_{i=1}^m$}
+	\Output{minimal number of sets $\{T_j\}$}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	Assume U is the set of uncovered elements. 
+
+	Set $U = \{ e_1, ..., e_n\}$.
+	\BlankLine
+	\While{$U \neq \emptyset$}{
+		pick $T_j = argmax_{j=1,...,m}\mid S_j\cap U\mid$
+
+		U $\leftarrow U \setminus T_j$
+	}
+	\Ret
+
+\end{Algorithm}
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

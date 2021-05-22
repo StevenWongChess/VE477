@@ -1,0 +1,165 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Neural Network} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Neural Network(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] A tensor
+\item [Complexity:] For a n-layer neural network,of which each layer has $n_i(i\in{1,2,\cdots,n})$, the complexity is $\mathcal{O}(\sum_{i=1}^{n-1}n_in_{i+1})$.
+\item [Data structure compatibility:] Matrix
+\item [Common applications:] Artificial intelligence
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	Neural network is a kind of mathematical model imitating the mechanism of biological neural network.
+\end{problem}
+
+
+\subsection*{Description}
+\subsubsection{Linear classification machine}
+In the early development of artificial intelligence, people want to use a simple predicting machine to implement intelligence. The simple predicting machine is actually a linear classification machine.
+\begin{equation}
+y=Ax+B
+\end{equation}
+where $x$ is input and $A, B$ are linear parameter. However, this machine cannot solve non-linear problem like \textbf{XOR}\cite{minsky69perceptrons} problem(Fig.~\ref{fig:\currfilebase_a}).
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{\currfilebase_a}
+	\caption{XOR problem}
+	\label{fig:\currfilebase_a}
+\end{figure}
+After studying biological neural network, scientist find the combination of activation function and connection model can solve non-linear problem. That is modern neural network.
+\subsubsection{Forward propagation} 
+In convenience, we will use a 3-layer(Fig.~\ref{fig:\currfilebase_b}) to demonstrate the theory. The first layer is an input layer, which has the same dimension as the input tensor. The second layer is a hidden layer, whose dimension is decided by user. The last one is an output layer, which has the same dimension as the number of categories.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{\currfilebase_b}
+	\caption{Structure of a 3-layer neural network}
+	\label{fig:\currfilebase_b}
+\end{figure}
+We use $I, H, O$ to denote values of input, hidden and output layer. The feed forward process can be calculated as following equation. For example, $H_1$ can be calculated as 
+\begin{align}
+h'_1 &= I_1\cdot w_{1,1} + I_2\cdot w_{2,1} + I_3\cdot w_{3,1}\\
+h_1 &= A(h_1)
+\end{align}
+where $A(x)$ means activation function. Some common activation functions are
+\begin{enumerate}
+\item sigmoid
+\begin{equation}
+y=\frac{1}{1+x^{-x}}
+\end{equation}
+\item tanh
+\begin{equation}
+y=tanh(x)
+\end{equation}
+\item Relu
+\begin{equation}
+y=\left\{
+	\begin{aligned}
+	x & & x \geq 0\\
+	0 & & x < 0
+	\end{aligned}
+\right.
+\end{equation}
+\end{enumerate}
+We can also use matrix to simplify our expression. The input matrix is 
+\begin{equation}
+I=
+\left(
+\begin{array}{c}
+i_1\\i_2\\i_3
+\end{array}
+\right)
+\end{equation}
+The hidden and output matrix are similar. The weight matrix is
+\begin{equation}
+W_{I,H}=
+\left(
+\begin{array}{ccc}
+w_{1,1} & w_{1,2} & w_{1,3}\\
+w_{2,1} & w_{2,2} & w_{2,3}\\
+w_{3,1} & w_{3,2} & w_{3,3}
+\end{array}
+\right)
+\end{equation}
+So the forward propagation of input and hidden layer can be represent as
+\begin{equation}
+H=A(W_{I,H}^{\mathrm{T}}I)
+\end{equation}
+In the same way the hidden and output layer is 
+\begin{equation}
+O=A(W_{H,O}^{\mathrm{T}}H)
+\end{equation}
+\subsubsection{Back propagation}
+We first define loss function $L$ to represent the error between ground truth and the output. The most commonly used is square error. 
+\begin{equation}
+L = \sum_n(t_n - o_n)^2
+\end{equation}
+To update weight, we must calculate
+\begin{equation}
+\frac{\partial L}{\partial w_{j,k}} = \frac{\partial}{\partial w_{j,k}}(T_k - O_k)^2
+\end{equation}
+We then use chain rule. The activation function is sigmoid here.
+\begin{align*}
+\frac{\partial L}{\partial w_{j,k}} 
+&= \frac{\partial L}{\partial O_k}\cdot \frac{\partial O_k}{\partial w_{j,k}}\\
+&=-2(t_k - o_k)\cdot \frac{\partial O_k}{\partial w_{j,k}}\\
+& = -2(t_k - o_k)\cdot \frac{\partial}{\partial w_{j,k}} \sigma(\sum_j w_{j,k} \cdot o_j)\\
+&=-2(t_k - o_k)\cdot \sigma(\sum_j w_{j,k} \cdot o_j)(1-\sigma(\sum_j w_{j,k} \cdot o_j))\cdot o_j
+\end{align*}
+The update function is
+\begin{equation}
+w^{(new)}_{j,k} = w^{(old)}_{j,k} - \alpha \cdot \frac{\partial L}{\partial w_{j,k}}
+\end{equation}
+$\alpha$ is learning rate which should be tuned.
+
+%Detailed description of the problem; More detailed information on the input and complexity; more applications with details on how they relate to each other (if this is the case). Do not hardcode references,  instead use the {\tt \textbackslash label} and {\tt \textbackslash reference} commands.  Examples: citation~\cite{ve477}, a group of figures (Fig.~\ref{fig:\currfilebase_group}), a sub-figure (Fig.~\ref{fig:\currfilebase_a}). To display a new line skip a line in the source code, do not use {\tt \textbackslash\textbackslash}.
+
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Neural network\label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{Training set $\{(I_i, T_i)\},i=1,2\cdots N$, Rounds $R$}
+	\Output{Output vector $O$ of sample $I$}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	\For{$r=1$ to $R$}{
+		\For{$i=1$ to $N$}{
+		Forward propagation\\
+		Calculate loss function $L$\\
+		Back propagation
+		}
+	}
+	\BlankLine
+
+	\Ret $O$
+
+\end{Algorithm}
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

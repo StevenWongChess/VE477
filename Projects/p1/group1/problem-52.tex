@@ -1,0 +1,105 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Square roots mod p (Tonelli-Shanks)} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Tonelli–Shanks~(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] a prime number p and a positive integer n in $\mathbb{Z} / p \mathbb{Z}$.
+\item [Complexity:] $\mathcal{O}(n^2)$
+\item [Data structure compatibility:] N/A
+\item [Common applications:] cryptography research, number theory research
+\end{overview}
+
+\begin{problem}{\pbname}
+	Given a prime number p and a positive integer n in $\mathbb{Z} / p \mathbb{Z}$, we want to find the quadratic residue of n, which is a positive integer r in $\mathbb{Z} / p \mathbb{Z}$, such that $r^2 \equiv n \mod p$. 
+\end{problem}
+
+
+\subsection*{Description}
+When designing an algorithm to solve for a computer science problem, we would like to seek for a fast algorithm. If we can get a polynomial time complexity, we will be satisfied and the implementation is workable. But in cryptography study, we do the reverse. The security requires a significantly high level of time complexity if someone else want to recover the secret. However, we should notice that although it should be designed to be hard to recover the secret, using the secret(its inverse) should be fast to process. \newline
+
+In the field of number theory, there is an interesting question that given a large prime number p and a positive interger n in $\mathbb{Z} / p \mathbb{Z}$, we would like to find out an integer r in $\mathbb{Z} / p \mathbb{Z}$ such that $r^2 \equiv n \mod p$. This is also called as finding a quadratic residue. Notice that these calculations are done under modular arithmetic within the field $\mathbb{Z} / p \mathbb{Z}$.\newline
+
+Further, Tonellis's algorithm would be extended for any cyclic group and to the kth root instead of square root. A table can be prepared in advance to facilitate the process. Another extension would be this algorithm can be used on module of $p^k$ instead of p. For this extension, the proof and process is more complicated and can be seen in Dickson's \emph{Theory of Numbers}\cite{dickson} and is beyond the scope of this course\cite{wiki}. The usage of this algorithm is mostly in the field of cryptography research like Rabin cryptography system and elliptic curves.\newline
+
+Time complexity analysis is very difficult for this algorithm. According to the paper written by Lindhurst and Scott. The average case time complexity would be $\frac{n^{2}}{4}+\frac{7 n}{4}+1$ multiplications with the standard deviation of deviation $\sqrt{\frac{n^{3}}{12}+\frac{3 n^{2}}{8}+\frac{13 n}{24}-1}$\cite{lindhurst1997analysis}. The worst case is easier to analysis, which should be $(n+2)+(n+1)+\ldots+5+4 = \frac{1}{2}\left(n^{2}+5 n-6\right)$ multiplications. Basically, the algorithm time complexity indicates that it is easy for eve to recover the secret. So Alice and Bob should never use a simple prime number p for quadratic residue. Instead, they should use $p\times q$ instead of p, where p and q are both large prime numbers.
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Tonelli–Shanks\label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{a prime number p and a positive integer n in $\mathbb{Z} / p \mathbb{Z}$}
+	\Output{a integer r in $\mathbb{Z} / p \mathbb{Z}$ such that $r^2 \equiv n \mod p$. }
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	\BlankLine
+	Factorize the number p - 1 by factor 2
+	$Q\leftarrow p - 1$
+	$s\leftarrow 0$
+	\While{$2\mid Q$}{
+		$Q\leftarrow Q/2$
+
+		s++
+	}
+	We now get $p - 1 = 2^s \times Q$.
+
+	Use Jacobi symbol to rule out the elements in $\mathbb{Z} / p \mathbb{Z}$ that are quadratic non-residues.
+
+	$M \leftarrow S$
+	
+	$c \leftarrow z^{Q}$
+	
+	$t \leftarrow n^{Q}$
+	
+	$R \leftarrow n^{\frac{Q+1}{2}}$
+
+	\While {$t\neq 0 \and t\neq 1$}{
+		find the least i, $0 < i < M$, such that ${t^2}^i = 1$.
+
+		$b \leftarrow c^{2^{M-i-1}}$
+
+		$M \leftarrow i$
+
+		$c \leftarrow b^{2}$
+
+		$t \leftarrow t b^{2}$
+
+		$R \leftarrow R b$
+	}
+
+	\If{t = 0}{
+		\Ret r = 0
+	}
+
+	\If{t = R}{
+		\Ret r = R
+	}
+	\cmt{notice that if we have the answer $r$, it is obvious that $-r$(or $p - r$) is another answer for $r^2 \equiv n \mod p$.\cite{ve475}}
+
+\end{Algorithm}
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

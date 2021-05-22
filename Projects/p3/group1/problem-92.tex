@@ -1,0 +1,131 @@
+%
+% do not add anything in this part
+%
+\documentclass[catalog.tex]{subfiles}
+
+% bib file: write the bibliography in a file having the same name as the latex file
+% change the suffix".tex" by ".bib" 
+% biblatex is required, do not use bibtex!
+% DO NOT TOUCH THE FOLLOWING LINE
+
+\begin{document}
+
+%
+% things can be added below
+%
+
+\def\pbname{PageRank} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] PageRank~(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] A network/graph $G$ with $N$ nodes
+\item [Complexity:] $\mathcal{O}(k*N)$, where $k$ is \#iteration 
+\item [Data structure compatibility:] Graph
+\item [Common applications:] Web pages ranking.
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	In a network, we measure the importance of a node with \textit{rank}. The \textit{PageRank} algorithm is a Monte-Carlo method to estimate the rank of all nodes in a network. It sets a uniform prior distribution for ranks and recursively updates it with a network transition matrix obtained from node connections.
+\end{problem}
+
+
+\subsection*{Description}
+
+A network is composed of nodes, and each of them has its own portion of significance. In many cases, we would prefer to visit the more important nodes. For example, among millions of entries in the result of search engines, those pages with higher weights will be shown in the first few pages, which are considered of higher quality. We measure the importance of a node with \textit{rank}. A page with higher rank has more importance in the network.
+
+PageRank is developed by Google company to rank web pages in their search engine results. Is is named after \textit{Larry Page}, one of the co-founder of the company \cite{google}. PageRank estimates the importance of an web page by observing the number and quality of links to it. The idea is based on two assumptions:
+
+\begin{itemize}
+    \item A page if of more importance if it has more links pointing in. 
+    
+    \item A link from an important page add more to a page's own importance.
+\end{itemize}
+
+Based on the idea, we may have the following way to calculate the rank of a page. Denote $r_i$ the rank of node $i$ in a network, and we have
+$$
+r_i = \sum_{j\in\mathcal{N}(i)} \frac{r_j}{d_j}
+$$
+where $\mathcal{N}(i)$ means the nodes linking into $i$ and $d_j$ is the out degree of node $j$. The equations for all nodes form a linear equation system, and we can express it in the way of 
+$$
+\mathbf{r} = M\cdot \mathbf{r}
+$$
+where matrix $M$ is defined as
+$$
+M_{ij} = \left\lbrace
+\begin{aligned}
+    1 / d_j, &\text{ if }j\rightarrow i\\
+    0, &\text{ otherwise}
+\end{aligned}
+\right.
+$$
+
+Therefore, to find the page ranks is to find the eigenvector of the matrix $M$. However, to efficiently solve for $\mathbf{r}$, we would adopt power iteration. As a Monte-Carlo Markov Chain (MCMC), the ranks is the stationary distribution of the matrix $M$, and the answer will approach it no matter what initial value we assign to $\mathbf{r}$. We will follow the scheme below:
+
+\begin{enumerate}
+    \item Initialize $\mathbf{r}^(0) = [r_1, \cdots, r_N]$ with $r_i=1/N$ for all $i\in[1, N]$.
+    \item Update $\mathbf{r}^{(t+1)} = M\cdot\mathbf{r}^{(t)}$
+    \item Repeat step 2 until $|r^{(t+1)}-r^{(t)}| < \eta$ a small positive number.
+\end{enumerate}
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[PageRank\label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{Network with $N$ nodes, small positive number $\eta$}
+	\Output{ranks $\mathbf{r}$ for all nodes}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+    \BlankLine
+    \For{$i\gets 1$ to $N$}{
+        \For{$j\gets 1$ to $N$}{
+            \lIf{$j$ points to $i$}{$M_{ij} = 1 / degree_{j, out}$}
+            \lElse{$M_{ij} = 0$}
+        }
+    }
+
+    \For{$i\gets 1$ to $N$}{
+        $r_i^0\gets 1/N$
+    }
+    
+    \While{$|r^{(t+1)}-r^{(t)}| < \eta$}{
+        $\mathbf{r}^{(t+1)} = M\cdot \mathbf{r}^{(t)}$
+    }
+
+	\KwRet{$\mathbf{r}$}
+
+\end{Algorithm}
+
+There are two main problem with this simple form. Firstly, if the out-degree of node $j$ is 0, i.e. it is linked to no other pages, then all $M_{\cdot j}=0$, causing the chain to enter a dead end. To deal with it, simply assign a uniform distribution to the $j$-th row. 
+
+Another problem is when a group of one or more pages have no links pointing out of the group, most of the ranks would be adsorbed by that group. To avoid it, we introduce random jump. Instead of always following the current ranks, the random walk jump to a node according to a uniform distribution with a small probability $1-\beta$. This help jump out of such rank "drains". The update rule now written as \cite{bharat1998improved}
+$$
+r_{i}=\sum_{j \rightarrow i} \beta \frac{r_{j}}{d_{j}}+(1-\beta) \frac{1}{N}
+$$
+and this leads to the Google Matrix that Google adopts
+$$
+A=\beta M + (1-\beta) + \frac{1}{N} I_{1/N}.
+$$
+
+The complexity of PageRank algorithm is $\mathcal{O}(kN)$, where $k$ is the number of iterations. We have known that a matrix-vector multiplication costs $\mathcal(O)(n^2)$, then the total complexity is originally larger. However, as a sparse network, the matrix $M$ have few non-zero elements, and sparse matrix multiplication requires $\mathcal{O}(nonZero(N))$. What's more, WWW is found to follow the power-law degree distribution \cite{huberman1999growth}, which means that the average web pages have 10 links \cite{leskovec2009community}, and $nonZero(M) \approx 10N$. Therefore, the total time complexity is reduce to $\mathcal{O}(kN)$.
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

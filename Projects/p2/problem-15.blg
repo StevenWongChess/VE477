@@ -1,0 +1,21 @@
+[0] Config.pm:304> INFO - This is Biber 2.14
+[0] Config.pm:307> INFO - Logfile is 'problem-15.blg'
+[101] biber-darwin:322> INFO - === Fri Nov  6, 2020, 23:35:36
+[122] Biber.pm:415> INFO - Reading 'problem-15.bcf'
+[252] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[252] Biber.pm:943> INFO - Found 4 citekeys in bib section 1
+[252] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[278] Biber.pm:4256> INFO - Processing section 1
+[278] Utils.pm:75> INFO - Globbing data source 'problem-15.bib'
+[279] Utils.pm:91> INFO - Globbed data source 'problem-15.bib' to problem-15.bib
+[279] Utils.pm:75> INFO - Globbing data source 'problem-55.bib'
+[279] Utils.pm:91> INFO - Globbed data source 'problem-55.bib' to problem-55.bib
+[291] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-15.bib' for section 1
+[292] bibtex.pm:1653> INFO - LaTeX decoding ...
+[299] bibtex.pm:1471> INFO - Found BibTeX data source 'problem-15.bib'
+[351] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[352] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[352] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[352] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
+[361] bbl.pm:652> INFO - Writing 'problem-15.bbl' with encoding 'UTF-8'
+[363] bbl.pm:755> INFO - Output to problem-15.bbl

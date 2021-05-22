@@ -1,0 +1,14 @@
+minvalue is 4 -1
+minvalue is 3 4
+minvalue is 4 4
+minvalue is 3 6
+minvalue is 2 7
+minvalue is 1 11
+
+---
+minvalue is 4 2
+minvalue is 3 4
+minvalue is 4 4
+minvalue is 3 6
+minvalue is 2 7
+minvalue is 1 11

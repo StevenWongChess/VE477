@@ -1,0 +1,81 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Faster R-CNN} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Faster R-CNN 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] A RGB 3 channel picture
+\item [Complexity:] None
+\item [Data structure compatibility:] None
+\item [Common applications:] Artificial intelligence
+\end{overview}
+
+
+\begin{problem}{\pbname}
+Object detection is the task of detecting instances of objects of a certain class within an image. A sample of object detection is shown in Figure~\ref{fig:\currfilebase_a}.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.3]{\currfilebase_a}
+	\caption{The result of object detection}
+	\label{fig:\currfilebase_a}
+\end{figure}
+Faster R-CNN\cite{fasterrcnn}, stading for Faster Region-based Convolutional
+Network, is a great milestone in the object detection. Its predecessor R-CNN\cite{rcnn} first raise some region of interest by using selective search algorithm whose speed is far from practice. Faster R-CNN raises a brand new architecture to perform object detection. The sketch of its architecture is shown in Figure~\ref{fig:\currfilebase_b}
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{\currfilebase_b}
+	\caption{The structure of Fast R-CNN}
+	\label{fig:\currfilebase_b}
+\end{figure}
+\end{problem}
+\subsection*{Description}
+\subsubsection{Conv Layers}
+Faster R-CNN use VGG network\cite{vgg} to generate feature. It's a common backbone used in computer vission, so we don't talk about it here. 
+\subsubsection{Region Proposal Network(RPN)}
+Talking about RPN, anchors are the most import mechanism. After we got feature maps by VGG net. We generate 9 anchors boxes shown in Figure~\ref{fig:\currfilebase_c}.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{\currfilebase_c}
+	\caption{Region Proposal Network(RPN)}
+	\label{fig:\currfilebase_c}
+\end{figure}
+After that, it will use regression to get 4 parameters $x_1, y_1, x_2, y_2$ for the bounding box of the target and 1 score for whether the bounding box includes a target. 
+\subsubsection{The RoI pooling layer}
+After we crop the image from the region proposed by RPN, the cropped image cannot be directly send to VGG net soon. Because the image size is not match with the input size of VGG. So, Faster R-CNN first project the region to $H/16\times W/16$ which is the scale of the feature map. Then, it divided the feature map to $H_{pool}\times W_{pool}$ grid where it is the scale of our target size. At last we do max pooling.
+\subsubsection{Classification}
+Classification use VGG net as common. The structure is shown in Figure~\ref{fig:\currfilebase_d}.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.3]{\currfilebase_d}
+	\caption{VGG net)}
+	\label{fig:\currfilebase_d}
+\end{figure}
+%Detailed description of the problem; More detailed information on the input and complexity; more applications with details on how they relate to each other (if this is the case). Do not hardcode references,  instead use the {\tt \textbackslash label} and {\tt \textbackslash reference} commands.  Examples: citation~\cite{ve477}, a group of figures (Fig.~\ref{fig:\currfilebase_group}), a sub-figure (Fig.~\ref{fig:\currfilebase_a}). To display a new line skip a line in the source code, do not use {\tt \textbackslash\textbackslash}.
+
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

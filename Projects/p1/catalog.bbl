@@ -1,0 +1,348 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{1}
+  \datalist[entry]{nty/global//global/global}
+    \entry{ve477}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=65314e903461a614229ea5a2099d758e}{%
+           family={Manuel},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{65314e903461a614229ea5a2099d758e}
+      \strng{fullhash}{65314e903461a614229ea5a2099d758e}
+      \strng{bibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorbibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authornamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorfullhash}{65314e903461a614229ea5a2099d758e}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{VE477 -- Introduction to Algorithms (lecture slides)}
+      \field{year}{2020}
+    \endentry
+    \entry{vg441}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=4f5a5b969fec6943af5468b1501a3126}{%
+           family={Shi},
+           familyi={S\bibinitperiod},
+           given={Cong},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{fullhash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{bibnamehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{authorbibnamehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{authornamehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{authorfullhash}{4f5a5b969fec6943af5468b1501a3126}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{VG441 -- Supply Chain (lecture slides)}
+      \field{year}{2020}
+    \endentry
+    \entry{williamson2011design}{book}{}
+      \name{author}{2}{}{%
+        {{hash=02261204ffbb80a5aec1a528b3549924}{%
+           family={Williamson},
+           familyi={W\bibinitperiod},
+           given={David\bibnamedelima P},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=6465ae9462ff5d959973dae65c9faaa2}{%
+           family={Shmoys},
+           familyi={S\bibinitperiod},
+           given={David\bibnamedelima B},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge university press}%
+      }
+      \strng{namehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{fullhash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{bibnamehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{authorbibnamehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{authornamehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{authorfullhash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The design of approximation algorithms}
+      \field{year}{2011}
+    \endentry
+  \enddatalist
+\endrefsection
+
+\refsection{2}
+  \datalist[entry]{nty/global//global/global}
+    \entry{dickson}{book}{}
+      \name{author}{1}{}{%
+        {{hash=2eb9817645d218422764332748a6b6ca}{%
+           family={Dickson},
+           familyi={D\bibinitperiod},
+           given={Leonard\bibnamedelima Eugene},
+           giveni={L\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Carnegie Institution of Washington}%
+      }
+      \strng{namehash}{2eb9817645d218422764332748a6b6ca}
+      \strng{fullhash}{2eb9817645d218422764332748a6b6ca}
+      \strng{bibnamehash}{2eb9817645d218422764332748a6b6ca}
+      \strng{authorbibnamehash}{2eb9817645d218422764332748a6b6ca}
+      \strng{authornamehash}{2eb9817645d218422764332748a6b6ca}
+      \strng{authorfullhash}{2eb9817645d218422764332748a6b6ca}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{History of the Theory of Numbers}
+      \field{year}{1919}
+    \endentry
+    \entry{lindhurst1997analysis}{article}{}
+      \name{author}{1}{}{%
+        {{hash=26a3bda606ab92ce36498a36b2cd9a2d}{%
+           family={Lindhurst},
+           familyi={L\bibinitperiod},
+           given={Scott},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Citeseer}%
+      }
+      \strng{namehash}{26a3bda606ab92ce36498a36b2cd9a2d}
+      \strng{fullhash}{26a3bda606ab92ce36498a36b2cd9a2d}
+      \strng{bibnamehash}{26a3bda606ab92ce36498a36b2cd9a2d}
+      \strng{authorbibnamehash}{26a3bda606ab92ce36498a36b2cd9a2d}
+      \strng{authornamehash}{26a3bda606ab92ce36498a36b2cd9a2d}
+      \strng{authorfullhash}{26a3bda606ab92ce36498a36b2cd9a2d}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{To appear in the proceedings of the}
+      \field{title}{An analysis of Shanks's algorithm for computing square roots in finite fields}
+      \field{year}{1997}
+    \endentry
+    \entry{ve475}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=65314e903461a614229ea5a2099d758e}{%
+           family={Manuel},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{65314e903461a614229ea5a2099d758e}
+      \strng{fullhash}{65314e903461a614229ea5a2099d758e}
+      \strng{bibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorbibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authornamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorfullhash}{65314e903461a614229ea5a2099d758e}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{VE475 -- Introduction to Cryptography (lecture slides)}
+      \field{year}{2020}
+    \endentry
+    \entry{wiki}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=b6aea1a416c89509a7df1cbb69249cb6}{%
+           family={{Wikipedia contributors}},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{bibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorbibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online; accessed 6-October-2020]}
+      \field{title}{Tonelli–Shanks algorithm}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb #https://en.wikipedia.org/wiki/Tonelli–Shanks_algorithm#cite_note-dickson-3
+      \endverb
+      \verb{url}
+      \verb #https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm#cite_note-dickson-3
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+
+\refsection{3}
+  \datalist[entry]{nty/global//global/global}
+    \entry{ve477}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=65314e903461a614229ea5a2099d758e}{%
+           family={Manuel},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{65314e903461a614229ea5a2099d758e}
+      \strng{fullhash}{65314e903461a614229ea5a2099d758e}
+      \strng{bibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorbibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authornamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorfullhash}{65314e903461a614229ea5a2099d758e}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{VE477 -- Introduction to Algorithms (lecture slides)}
+      \field{year}{2020}
+    \endentry
+    \entry{vg441}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=4f5a5b969fec6943af5468b1501a3126}{%
+           family={Shi},
+           familyi={S\bibinitperiod},
+           given={Cong},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{fullhash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{bibnamehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{authorbibnamehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{authornamehash}{4f5a5b969fec6943af5468b1501a3126}
+      \strng{authorfullhash}{4f5a5b969fec6943af5468b1501a3126}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{VG441 -- Supply Chain (lecture slides)}
+      \field{year}{2020}
+    \endentry
+    \entry{williamson2011design}{book}{}
+      \name{author}{2}{}{%
+        {{hash=02261204ffbb80a5aec1a528b3549924}{%
+           family={Williamson},
+           familyi={W\bibinitperiod},
+           given={David\bibnamedelima P},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=6465ae9462ff5d959973dae65c9faaa2}{%
+           family={Shmoys},
+           familyi={S\bibinitperiod},
+           given={David\bibnamedelima B},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge university press}%
+      }
+      \strng{namehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{fullhash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{bibnamehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{authorbibnamehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{authornamehash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \strng{authorfullhash}{f2e544f7f8fc858b8a13008c25760f1c}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The design of approximation algorithms}
+      \field{year}{2011}
+    \endentry
+  \enddatalist
+\endrefsection
+
+\refsection{4}
+  \datalist[entry]{nty/global//global/global}
+    \entry{10.5555/59556}{book}{}
+      \name{author}{3}{}{%
+        {{hash=c6de6664bfb9ecb58d2e1c6d0dc60479}{%
+           family={Kendall},
+           familyi={K\bibinitperiod},
+           given={M.\bibnamedelimi G.},
+           giveni={M\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=80d04dc6ef73423f59404da9c9d12ed6}{%
+           family={Stuart},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7f64e8d2de30f89c2c874fcef25f9145}{%
+           family={Ord},
+           familyi={O\bibinitperiod},
+           given={J.\bibnamedelimi K.},
+           giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {USA}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press, Inc.}%
+      }
+      \strng{namehash}{9b718b390e12e6a7b2a38c47945ae11f}
+      \strng{fullhash}{9b718b390e12e6a7b2a38c47945ae11f}
+      \strng{bibnamehash}{9b718b390e12e6a7b2a38c47945ae11f}
+      \strng{authorbibnamehash}{9b718b390e12e6a7b2a38c47945ae11f}
+      \strng{authornamehash}{9b718b390e12e6a7b2a38c47945ae11f}
+      \strng{authorfullhash}{9b718b390e12e6a7b2a38c47945ae11f}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0195205618}
+      \field{title}{Kendall's Advanced Theory of Statistics}
+      \field{year}{1987}
+    \endentry
+  \enddatalist
+\endrefsection
+
+\refsection{5}
+  \datalist[entry]{nty/global//global/global}
+    \entry{minsky69perceptrons}{book}{}
+      \name{author}{2}{}{%
+        {{hash=2fe335dc52e059141e41e4fada160d64}{%
+           family={Minsky},
+           familyi={M\bibinitperiod},
+           given={Marvin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1c2a469ce4211d0d3369b692b74ee471}{%
+           family={Papert},
+           familyi={P\bibinitperiod},
+           given={Seymour},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA, USA}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{fullhash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{bibnamehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{authorbibnamehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{authornamehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{authorfullhash}{b50bea5dca97e316780bd758a3cc428e}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Perceptrons: An Introduction to Computational Geometry}
+      \field{year}{1969}
+      \keyw{linear-classification neural-networks seminal}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

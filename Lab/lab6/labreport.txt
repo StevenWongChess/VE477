@@ -1,0 +1,11 @@
+VE477
+Lab 6
+Wang Yichao
+517370910011
+
+1. For BFS, please check the function BFS in EdmondsKarp.py
+2. For Edmonds-Karp algorithm, please check the function function EdmondsKarp in EdmondsKarp.py
+3. For Maximum Bipartite Matching Problem, please type
+    chmod +x ./run.sh
+    ./run.sh
+And I use the graph on page 43 of slide c4, the result is 4, which is the same as eyeballing.

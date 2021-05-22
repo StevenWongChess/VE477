@@ -1,0 +1,121 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Bloom filters} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] add~(algo.~\ref{alg:\currfilebase_a}), query~(algo.~\ref{alg:\currfilebase_b})
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] an element $e$ to add or query
+\item [Complexity:] $\mathcal{O}(k)$
+\item [Data structure compatibility:] An $m$-bit array $A$ with $k$ hash functions
+\item [Common applications:] cache filtering, data synchronization, chemical/bio-informatics structure searching, etc.
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	Bloom filter is a type of data structure intended for fast and space-efficient element query. A simple Bloom filter is implemented with an $m$-bit array and a series of hash functions, the number of which denoted by $k$. However, it is possible to produce false positive results (where the filter returns true even though the element doesn't exist), thus the structure parameters should be carefully decided.
+\end{problem}
+
+
+\subsection*{Description}
+
+Bloom filter is a data structure proposed by Burton Howard Bloom in 1970 \cite{bloom1970space}, which is intended for a fast judgement whether an element exists in a set. It requires a constant time and space to maintain a set of elements. On the other hand, it is a probabilistic data structure, which means that the search result might not be definite. It would yield \textit{definitely not existing} or \textit{probably existing} answers, i.e. there would be false positive results \cite{nilsson}. Another point is that the element can only be added but not be deleted \cite{nilsson}.
+
+To set up a Bloom filter, we need a binary array $A$ with $m$ bits, all initially set to be 0. We denote the $i$-th bit as $A_i$. Besides, $k$ different hash functions are needed, each mapping an element $e$ onto the $m$ positions in $A$. The hash functions should be non-correlated and their results should be uniformly distributed. 
+
+To add\ref{alg:problem-5_a} an element $e$ to the set, feed it to the hash functions, and set the array bits corresponding to the hash results to be 1.
+
+To query\ref{alg:problem-5_b} whether the element $e$ exists in the set, feed it to the hash functions as well. If any one of the array bits corresponding to the hash results is 0, then this element is definitely not existing. On the other hand, if all of the corresponding bits are 1, this element probably exists with a false positive rate $\epsilon$.
+
+\begin{Algorithm}[Add new element\label{alg:\currfilebase_a},htbp]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{new element $e$}
+    % \Output{}
+    \For{$i \gets 1$ to $k$}
+    {
+        $index \gets Hash_i(e)$
+
+        set $A_{index} = 1$
+    }
+	% \BlankLine
+
+	% \Ret
+
+\end{Algorithm}
+
+\begin{Algorithm}[Query\label{alg:\currfilebase_b},htbp]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{element to query $e$}
+	\Output{whether $e$ exists}
+	%	\Fn{\myfunction{$a,b$}}{
+    %	}
+    \For{$i\gets 1$ to $k$}
+    {
+        $index \gets Hash_i(e)$
+
+        \If{$A_{index} = 0$}
+        {
+            \Ret False
+        }
+    }
+	\BlankLine
+
+	\Ret True
+
+\end{Algorithm}
+
+The number of hash functions $k$ is decided by the element number $n$ and array length $m$. For given $m, n$, the value $k$ that minimizes the false positive rate is given by
+$$
+k = \frac{m}{n}\ln 2,
+$$
+and it gives the minimum false positive rate
+$$
+\epsilon \approx \left(1-e^{-kn/m}\right)^k \rightarrow \ln \epsilon=-\frac{m}{n}(\ln 2)^2
+$$
+It also suffices to show the optimal \textit{bits per element} $m/n$ is approximately $-1.44\log_2\epsilon$. Here gives a deduction for the above equations \cite{kumar}.
+
+Bloom filter has unusual time complexity properties. We may easily see that no matter for adding or querying, what we need to do is always computing the $k$ hash values and looking up the array, which means the time complexity is simply $\mathcal{O}(k)$. 
+
+The space of a Bloom filter is constant $\mathcal{O}(m)$, since Bloom filter does not need to really store the elements to search them like conventional deterministic data structures, but contains hash values as characteristics instead. However due to the possibility of false positive results, Bloom filter does not always have advantages over deterministic data structures. In case of a limited potential range of elements, a traditional deterministic data structure is sufficient, while Bloom filter is preferred when the range size is large or hard to estimate \cite{llimllib}.
+
+As discussed above, the allowing of false positive leads to saving in space and runtime, hence both simple Bloom filters and their extensions can be applied in cases where we only need to maintain the existence of set elements. One typical database applications is cache filtering. According to an analysis, over 3/4 of the URLs requested by net users are "one-hit-wonders", which would be accessed only once and never again \cite{maggs2015algorithmic}. It would be a waste if there are cached on disks. A Bloom filter can identify whether a URL has been requested before and cache it if so, filtering the "one-hit" urls and saving plenty of disk space. Andrei and Michael's survey also mentioned a "more widespread attention in the networking literature" for Bloom filters \cite{broder2004network}. They concludes four main types of jobs where overlapping is also possible, which are collaborating in overlay and peer-to-peer networks, resource routing, pack routing and measurement \cite{broder2004network}. Further applications include bio-informatics field, where Bloom filters are used to generate space-efficient biometric rotation-invariant feature representations \cite{rathgeb2014application}.
+
+
+% \begin{figure}[!htb]
+% 	\centering
+% 	\subfloat[Pic. 1\label{fig:\currfilebase_a}]{\includegraphics{\currfilebase_a}}
+% 	\hspace{2cm} %\qquad
+% 	\subfloat[Pic. 2\label{fig:\currfilebase_b}]{\includegraphics{\currfilebase_b}}
+% 	\caption{Group of pictures}
+% 	\label{fig:\currfilebase_group}
+% \end{figure}
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

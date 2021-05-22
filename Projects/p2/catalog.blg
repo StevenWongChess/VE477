@@ -1,0 +1,120 @@
+[0] Config.pm:304> INFO - This is Biber 2.14
+[1] Config.pm:307> INFO - Logfile is 'catalog.blg'
+[99] biber-darwin:322> INFO - === Fri Nov  6, 2020, 23:51:46
+[121] Biber.pm:415> INFO - Reading 'catalog.bcf'
+[265] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[265] Biber.pm:943> INFO - Found 4 citekeys in bib section 1
+[266] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[266] Biber.pm:943> INFO - Found 7 citekeys in bib section 2
+[266] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[266] Biber.pm:943> INFO - Found 0 citekeys in bib section 3
+[266] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[267] Biber.pm:943> INFO - Found 3 citekeys in bib section 4
+[267] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[267] Biber.pm:943> INFO - Found 0 citekeys in bib section 5
+[267] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[268] Biber.pm:943> INFO - Found 10 citekeys in bib section 6
+[268] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[329] Biber.pm:4256> INFO - Processing section 1
+[329] Utils.pm:75> INFO - Globbing data source 'problem-15.bib'
+[330] Utils.pm:91> INFO - Globbed data source 'problem-15.bib' to problem-15.bib
+[330] Utils.pm:75> INFO - Globbing data source 'problem-55.bib'
+[330] Utils.pm:91> INFO - Globbed data source 'problem-55.bib' to problem-55.bib
+[330] Utils.pm:75> INFO - Globbing data source 'problem-82.bib'
+[330] Utils.pm:91> INFO - Globbed data source 'problem-82.bib' to problem-82.bib
+[330] Utils.pm:75> INFO - Globbing data source 'problem-115.bib'
+[330] Utils.pm:91> INFO - Globbed data source 'problem-115.bib' to problem-115.bib
+[330] Utils.pm:75> INFO - Globbing data source 'problem-119.bib'
+[330] Utils.pm:91> INFO - Globbed data source 'problem-119.bib' to problem-119.bib
+[331] Utils.pm:75> INFO - Globbing data source 'problem-136.bib'
+[331] Utils.pm:91> INFO - Globbed data source 'problem-136.bib' to problem-136.bib
+[345] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-15.bib' for section 1
+[347] bibtex.pm:1653> INFO - LaTeX decoding ...
+[355] bibtex.pm:1471> INFO - Found BibTeX data source 'problem-15.bib'
+[415] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[415] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[415] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[416] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
+[433] Biber.pm:4256> INFO - Processing section 2
+[433] Utils.pm:75> INFO - Globbing data source 'problem-15.bib'
+[433] Utils.pm:91> INFO - Globbed data source 'problem-15.bib' to problem-15.bib
+[434] Utils.pm:75> INFO - Globbing data source 'problem-55.bib'
+[434] Utils.pm:91> INFO - Globbed data source 'problem-55.bib' to problem-55.bib
+[434] Utils.pm:75> INFO - Globbing data source 'problem-82.bib'
+[434] Utils.pm:91> INFO - Globbed data source 'problem-82.bib' to problem-82.bib
+[434] Utils.pm:75> INFO - Globbing data source 'problem-115.bib'
+[434] Utils.pm:91> INFO - Globbed data source 'problem-115.bib' to problem-115.bib
+[434] Utils.pm:75> INFO - Globbing data source 'problem-119.bib'
+[434] Utils.pm:91> INFO - Globbed data source 'problem-119.bib' to problem-119.bib
+[434] Utils.pm:75> INFO - Globbing data source 'problem-136.bib'
+[434] Utils.pm:91> INFO - Globbed data source 'problem-136.bib' to problem-136.bib
+[435] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-15.bib' for section 2
+[442] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-55.bib' for section 2
+[444] bibtex.pm:1653> INFO - LaTeX decoding ...
+[458] bibtex.pm:1471> INFO - Found BibTeX data source 'problem-55.bib'
+[517] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[518] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[518] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[518] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
+[528] Biber.pm:4256> INFO - Processing section 4
+[529] Utils.pm:75> INFO - Globbing data source 'problem-15.bib'
+[529] Utils.pm:91> INFO - Globbed data source 'problem-15.bib' to problem-15.bib
+[529] Utils.pm:75> INFO - Globbing data source 'problem-55.bib'
+[529] Utils.pm:91> INFO - Globbed data source 'problem-55.bib' to problem-55.bib
+[529] Utils.pm:75> INFO - Globbing data source 'problem-82.bib'
+[529] Utils.pm:91> INFO - Globbed data source 'problem-82.bib' to problem-82.bib
+[529] Utils.pm:75> INFO - Globbing data source 'problem-115.bib'
+[529] Utils.pm:91> INFO - Globbed data source 'problem-115.bib' to problem-115.bib
+[529] Utils.pm:75> INFO - Globbing data source 'problem-119.bib'
+[529] Utils.pm:91> INFO - Globbed data source 'problem-119.bib' to problem-119.bib
+[530] Utils.pm:75> INFO - Globbing data source 'problem-136.bib'
+[530] Utils.pm:91> INFO - Globbed data source 'problem-136.bib' to problem-136.bib
+[530] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-15.bib' for section 4
+[531] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-55.bib' for section 4
+[533] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-82.bib' for section 4
+[534] bibtex.pm:1653> INFO - LaTeX decoding ...
+[538] bibtex.pm:1471> INFO - Found BibTeX data source 'problem-82.bib'
+[541] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-115.bib' for section 4
+[543] bibtex.pm:1653> INFO - LaTeX decoding ...
+[547] bibtex.pm:1471> INFO - Found BibTeX data source 'problem-115.bib'
+[548] Utils.pm:304> WARN - Duplicate entry key: 'boyd_vandenberghe_2004' in file 'problem-115.bib', skipping ...
+[550] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-119.bib' for section 4
+[552] bibtex.pm:1653> INFO - LaTeX decoding ...
+[555] bibtex.pm:1471> INFO - Found BibTeX data source 'problem-119.bib'
+[556] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-136.bib' for section 4
+[558] bibtex.pm:1653> INFO - LaTeX decoding ...
+[578] bibtex.pm:1471> INFO - Found BibTeX data source 'problem-136.bib'
+[579] Utils.pm:304> WARN - Duplicate entry key: 've477' in file 'problem-136.bib', skipping ...
+[589] Utils.pm:304> WARN - I didn't find a database entry for 'fasterrcnn' (section 4)
+[589] Utils.pm:304> WARN - I didn't find a database entry for 'rcnn' (section 4)
+[589] Utils.pm:304> WARN - I didn't find a database entry for 'vgg' (section 4)
+[597] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[597] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[597] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[597] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
+[598] Biber.pm:4256> INFO - Processing section 6
+[598] Utils.pm:75> INFO - Globbing data source 'problem-15.bib'
+[598] Utils.pm:91> INFO - Globbed data source 'problem-15.bib' to problem-15.bib
+[598] Utils.pm:75> INFO - Globbing data source 'problem-55.bib'
+[598] Utils.pm:91> INFO - Globbed data source 'problem-55.bib' to problem-55.bib
+[598] Utils.pm:75> INFO - Globbing data source 'problem-82.bib'
+[598] Utils.pm:91> INFO - Globbed data source 'problem-82.bib' to problem-82.bib
+[599] Utils.pm:75> INFO - Globbing data source 'problem-115.bib'
+[599] Utils.pm:91> INFO - Globbed data source 'problem-115.bib' to problem-115.bib
+[599] Utils.pm:75> INFO - Globbing data source 'problem-119.bib'
+[599] Utils.pm:91> INFO - Globbed data source 'problem-119.bib' to problem-119.bib
+[599] Utils.pm:75> INFO - Globbing data source 'problem-136.bib'
+[599] Utils.pm:91> INFO - Globbed data source 'problem-136.bib' to problem-136.bib
+[600] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-15.bib' for section 6
+[601] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-55.bib' for section 6
+[602] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-82.bib' for section 6
+[604] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-115.bib' for section 6
+[604] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-119.bib' for section 6
+[605] Biber.pm:4455> INFO - Looking for bibtex format file 'problem-136.bib' for section 6
+[673] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[673] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[673] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[673] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
+[683] bbl.pm:652> INFO - Writing 'catalog.bbl' with encoding 'UTF-8'
+[693] bbl.pm:755> INFO - Output to catalog.bbl
+[693] Biber.pm:128> INFO - WARNINGS: 5

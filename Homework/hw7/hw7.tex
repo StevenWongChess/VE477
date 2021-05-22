@@ -1,0 +1,80 @@
+%!TeX spellcheck = en-US
+\documentclass{article}
+\usepackage{bookmark}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}  
+\usepackage{algorithm}  
+\usepackage{algorithmicx}  
+\usepackage{algpseudocode} 
+\usepackage{forest}
+\newcommand{\bigO}{\mathcal{O}}
+\usepackage{listings}
+ 
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  
+\renewcommand{\algorithmicensure}{\textbf{Output:}}  
+
+\begin{document}
+\noindent
+
+%========================================================================
+\noindent\framebox[\linewidth]{\shortstack[c]{
+\Large{\textbf{VE 477 Homework7}}\vspace{1mm}\\
+Wang Yichao, ID: 517370910011}}
+
+\begin{itemize}
+
+\item \textbf{Exercise 1.}
+1. $\left(\begin{array}{l}6 \\ 2\end{array}\right)=15$, when $n<6$, $\left(\begin{array}{l}n \\ 2\end{array}\right)$ is smaller than 15. Thus the reverse of it is greater than $\frac{1}{15}$.
+
+2. If $p_k = P(t/\sqrt{2})$, then $p_{k+1} = P(t)$. The rest is just replacement.
+
+3. (a) just plug in the formula $z_{k}=4 / p_{k}-1$ (we can take it as $p_k = \frac{4}{z_k + 1}$). 
+
+We get $$\frac{4}{z_{k+1}+1} = \frac{4}{z_{k}+1} - 1/4\times \frac{4}{z_{k}+1}^2$$. 
+
+That is $$z_{k+1} = \frac{(z_k+1)^2}{z_k} - 1 = z_{k}+1+\frac{1}{z_{k}}$$
+
+(b) by induction. 
+
+if $k<z_{k}<59+2 k$, then we need to prove that $$k+1<z_{k+1}<59+2 k + 2$$
+
+However, $z_{k+1} = z_{k}+1+\frac{1}{z_{k}}$ and we can tell that $$k+2<k+2+\frac{1}{k+1}<z_{k+1}<59+2k + 1+ \frac{1}{50+2k}<59 + 2k +2$$
+Finally we need to check the base case, where k = 0. Big problem, here $z_0 = 59$ instead of $<59$, so the homework itself is wrong.
+
+4. Just take $k = 2 \log _{2} n$ to make life easier. From the last question, we know that $k<z_{k}<59+2 k$, that is $$\frac{1}{\log _{2} n}<p_{k}<\frac{4}{\log _{2} n}$$, we can conclude that $P(n)=\Omega(1 / \log n)$.
+
+
+\item \textbf{Exercise 2.}
+1. Using the idea of DP. For stack we only need to care about the last element. And the min element is either updated to the last element or does not change. We store an (element, minimum) pair in the stack. For example, if we push 3, 1, 2, 4 into the stack, we will get (3, 3) (1, 1) (2, 1) (4, 1). For push operation, we need to update the minimum. For pop operation, just delete the last pair. For retrieving min, we just read from the last pair's minimum (second entry).
+
+2. Too little information provided. Assume that the ants keeps the same speed after reverse direction, then we can treat it like nothing happens. Thus for each ant, it needs to travel to the ends. Assume that the n ants are uniformly distributed, then it will take 1 second for the farthest ant to fall. So it takes 1 second for all to fall.
+
+\end{itemize}
+
+%========================================================================
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

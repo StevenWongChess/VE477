@@ -1,0 +1,76 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Image cropping} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Cropping~(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] Image to be cropped.
+\item [Complexity:] $\mathcal{O}(mn)$ depending on the size % last time here
+\item [Data structure compatibility:] Array.
+\item [Common applications:] Image processing.
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	Image cropping is an elementary operation on an image of removing an outer part of the image and leaving a smaller rectangular region. It can help remove the unwanted parts, improve image framing, highlight a part of the image or produce uniform datasets.
+\end{problem}
+
+
+\subsection*{Description}
+
+Image cropping is the removal of an outer part of the image. It can be performed physically as well as digitally. It would change the basic framing, ratio and structure of the image itself. The following Figure \ref{fig:\currfilebase_group} gives an example of image cropping.
+
+\begin{figure}[!htb]
+    \centering
+	\subfloat[Pic. 1\label{fig:\currfilebase_a}]{\includegraphics[width=4cm]{\currfilebase_a.png}}
+	\hspace{2cm} %\qquad
+	\subfloat[Pic. 2\label{fig:\currfilebase_b}]{\includegraphics[width=4cm]{\currfilebase_b.png}}
+	\caption{Group of pictures}
+	\label{fig:\currfilebase_group}
+\end{figure}
+
+The process of cropping a image is simple as explained literally. We will make this operation more mathematically accurate before discussing the algorithm. Suppose we have an bitmap image of size $a\times b$, and we hope to crop a $m\times n$-sized rectangular in the bottom-right part of the point $(x,y)$ from it. To reach this aim, just create a new array of size $m\times n$, and assign the corresponding color to each point. You may see the process in the pseudo-code in Algorithm \ref{alg:\currfilebase}.
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Image Cropping\label{alg:\currfilebase}, t]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{Image $I$ as a 2-dim array of size $a\times b$, the target part size $m\times n$ and reference point $(x,y)$}
+	\Output{The new cropped image $T^\prime$}
+    $I\gets$ array of size $m\times n$
+
+    \For{$i\gets 1$\KwTo $m$}{
+        \For{$j\gets 1$\KwTo $n$}{
+            $I^\prime[i][j] \gets I[x+i][y+j]$
+        }
+    }
+	\KwRet{$I^\prime$}
+
+\end{Algorithm}
+
+To assign value for each pixel in the $m\times n$ rectangular, it is easy to see that the algorithm has a time complexity of $\mathcal{O}(mn)$.
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

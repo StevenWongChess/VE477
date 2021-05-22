@@ -1,0 +1,279 @@
+%
+% do not add anything in this part
+%
+\documentclass[catalog.tex]{subfiles}
+
+% bib file: write the bibliography in a file having the same name as the latex file
+% change the suffix".tex" by ".bib" 
+% biblatex is required, do not use bibtex!
+% DO NOT TOUCH THE FOLLOWING LINE
+
+\begin{document}
+
+%
+% things can be added below
+%
+
+\def\pbname{PNG Encoding and Decoding} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Filtering~(algo.~\ref{alg:\currfilebase_a}), Huffman coding~(algo.~\ref{alg:\currfilebase_b}), LZ77~(algo.~\ref{alg:\currfilebase_c}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] Origin raw image as pixelwise color data.
+\item [Complexity:] Not the main topic.
+\item [Data structure compatibility:] Array, Huffman tree
+\item [Common applications:] Lossless image compression.
+\end{overview}
+
+
+\begin{problem}{\pbname}
+    The portable network graphic (PNG) format is a bitmap image file format which is portable and supports lossless compressed \cite{boutell1997png}. It is developed to replace Graphics Interchange Format (GIF), but posses more features that GIF does not have \cite{boutell1997png}. To increase space efficiency, it do filtering on th original bitmap data and perform DEFLATE algorithm for compression. This allows PNGs to carry image information with much smaller size, compared to formats like GIF.
+\end{problem}
+
+
+\subsection*{Description}
+
+The most instinctive way to store an image file is to direct save the pixel information as a large 2 or 3-dimensional array (for gray-scale and RGB images). However, this method occupies large space and is not suitable for transmission, especially through the internet. PNG brings an encoding method  to significantly compress the original information. It first filters on the raster graphics and then apply an in-the-box compression algorithm called DEFALTE. We will first talk about these two aspects.
+
+\subsubsection*{Filtering}
+
+Before introducing the principles of filtering, we will discuss instinct of coming up with filtering. For a series of data, if they are linearly correlated, i.e. the difference between consecutive elements are low, then those differences would have high probability to be lower than the original data and many of them are duplicated. This provides convenience for further compressions. For example, a transformation on an integer series is shown below:
+
+$$
+a = [2,3,4,6,7,8,6,5,4,3,1] \Rightarrow b = [2,1,1,2,1,1,-2,-1,-1,-2]
+$$
+
+We may see that an evenly distributed array is transformed into duplicated integers like $\pm1$ or $\pm2$. This make the data more compressible. In this simple case, we calculates the difference of neighbouring elements, and such method is called Delta encoding. PNG make use of adjusted Delta encodings, which is named "filtering", where it calculates the differences of the current pixel with a predictor based on the pixel to the left, above and above-left \cite{colt2016how}. The brief process of filtering is described in Algorithm \ref{alg:\currfilebase_a}. There are 5 type of filtering in PNG, which are shown in Table \ref{tbl:\currfilebase_a}. Denote the current pixel as $X$, and the left, top and top-left pixel as $L$, $T$ and $TL$.
+
+\begin{Algorithm}[Filtering\label{alg:\currfilebase_a}]
+\KwIn{Image lines $L_1$, $L_2$ with length $n$, where $L_1$ is right above $L_2$}
+\KwOut{The filtered line of $L_2$}
+    $L_2 = []$
+
+    $L_2^\prime[1] = L_2[1]$
+
+    \For{$i\gets 2$ \KwTo $n$}{
+        $L_2^\prime[i] = L_2 - Predictor(L_2[i-1], L_1[i], L_1[i-1])$
+    }
+    
+    \KwRet{$L_2^\prime$}
+\end{Algorithm}
+
+\begin{table}[!htb]
+	\centering
+	\begin{tabular}{lll}
+        \toprule
+        Type & Description & Expression \\
+        \midrule
+        0 & No filtering & $X$ \\
+        1 & With left & $X-L$ \\
+        2 & With top & $X-T$ \\
+        3 & With Avg of left and top & $X-\lfloor(L+T)/2\rfloor$ \\
+        4 & Paeth predictor & $X-P(L,T,TL)$ \\
+		\bottomrule
+    \end{tabular}
+    \caption{Types of PNG filtering}
+	\label{tbl:\currfilebase_a}
+\end{table}
+
+The type 4, Paeth predictor is due to Alan W. Paeth \cite{1991Image}, which first calculate a simple linear composition of the three pixels, then choose the closest pixel to it from the 3 original ones as the predictor. A simple psuedocode illustrates it in Algorithm \ref{alg:\currfilebase_pp} \cite{W3CPNG}.
+
+\begin{Algorithm}[PaethPredictor\label{alg:\currfilebase_pp}]
+\SetKwFunction{myfunction}{PaethPredictor}
+\Fn{\myfunction{$X,L,T,TL$}}{
+    $P=L+T-TL$\;
+    $pl = |P-L|$;
+    $pt = |P-T|$;
+    $ptl = |P-TL|$\;
+    \uIf{$pl$ is minimum}{
+        \Ret $L$
+    }
+    \uElseIf{$pt$ is minimum}{
+        \Ret $T$
+    }
+    \Else{
+        \Ret $TL$
+    }
+}
+\end{Algorithm}
+
+Despite the way of demonstration here, true filtering process the data as byte instead of pixels, regardless of the bit depth or color type. By line scanning on the image, byte streams are created, where filtering algorithm will be working on.
+
+Each filter has its best performance cases, and the encoder programs would automatically choose the best one given the image rows. Such a row-by-row choice improves the compression. This heuristic method of improving is designed by Lee Daniel Crocker, one of the member of PNG working group, who performed empirical tests on many images during the creation of PNG format \cite{crocker1995png}. 
+
+\subsubsection*{DEFLATE compression}
+
+DEFLATE is a lossless compression file format, designed by Phil Katz. Primary for personal use of a archiving tool, but was later specified as standard in RFC 1996 \cite{deutsch1996rfc1951}. Technically, it's a combination of Huffman coding and LZSS compression algorithm. The former increase the space efficiency by attributing shorter coding for more frequently appeared characters. The latter achieves compression by reusing duplicated parts in the data. We are discussing these 2 algorithms in the following parts.
+
+Huffman code is a type of prefix code used for lossless compression, while Huffman coding describes the algorithm of finding such a code, designed by David A. Huffman \cite{huffman1952method}. Prefix code is defined on a system such that no element is the prefix of another. For example, the set $\{1,2,12\}$ doesn't satisfy the prefix property, as $1$ is the prefix of $12$. This means that a Huffman code can be generated by a binary trees, called Huffman tree, and the Huffman coding contains the way to generate a Huffman tree and develop a coding system from it. It is shown in the Algorithm \ref{alg:\currfilebase_b}. It takes in the frequency statistics and returns the binary codes for each character.
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Huffman Coding\label{alg:\currfilebase_b}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	\SetKwFunction{huff}{HuffmanTree}
+	\SetKwFunction{gene}{GenerateCode}
+	\Input{Character frequency statistics as a dictionary $F$}
+	\Output{Codes for each character as a dictionary $C$}
+    \Fn{\huff{$F$}}{
+        $Q\gets$ a min-queue
+
+        \ForEach{character $ch$}{
+            create new node $n$
+
+            $n.char = ch$; $n.value = F[ch]$
+
+            $Q.Insert(n, n.value)$
+        }
+
+        \While{$Q.size > 1$}{
+            create a new node $n$
+
+            $n.left\gets Q.ExtractMin()$
+
+            $n.right\gets Q.ExtractMin()$
+
+            $n.value \gets n.left.value + n.right.value$
+
+            $Q.Insert(n, n.value)$
+        }
+
+        $root = Q.ExtractMin()$
+
+        \KwRet{$root$}
+    }
+    
+    \Fn{\gene{$node$}}{
+        \lIf{$node == root$}{\KwRet{""} \cmt{can be improved with dynamic programming}}
+        \lElseIf{$n==n.parent.left$}{\KwRet{\gene{$node.parent$} + "0"}}
+        \lElseIf{$n==n.parent.right$}{\KwRet{\gene{$node.parent$} + "1"}}
+    }
+    \BlankLine
+    
+    $tree \gets \huff{F}$
+
+    \ForEach{unique character $ch$}{
+        $n\gets$ the leaf node such $n.ch == ch$
+        $C[ch] = \gene{n}$
+    }
+
+	\Ret
+
+\end{Algorithm}
+
+Here offer an example of encoding the characters with frequency of 
+$$
+[a:8,\ b:6,\ c:1,\ d:3,\ e:9]
+$$
+which would gives a Huffman tree in Figure \ref{fig:\currfilebase_a}. The left path corresponds to 0 and right to 1, so we can obtain the coding table shown in Table \ref{tbl:\currfilebase_b}. Note that no element is the prefix of another. Since if code $c_1$ is the prefix of code $c_2$, the node of $c_1$ should be an ancestor of that of $c_2$, which cannot be a leaf itself, so no character would be encoded as $c_2$. This guarantee the possibility of decoding.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.8]{\currfilebase_a}
+    \caption{Example Huffman Tree}
+    \label{fig:\currfilebase_a}
+\end{figure}
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{cr}
+        \toprule
+        char & code \\
+        \midrule
+        a & 10 \\
+        b & 01 \\
+        c & 000 \\
+        d & 001 \\
+        e & 11 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Example Huffman Coding}
+	\label{tbl:\currfilebase_b}
+\end{table}
+
+We need 3 bits originally to encode each of the 5 characters, which would take up $3\times(8+6+1+3+9)=81$ bits. However, with the Huffman code offerred in Table \ref{tbl:\currfilebase_b}, the new size is $2\times(8+6+9)+3\times(1+3)=58$ bits, which saves $(81-58)/81=28.4\%$ space. We may see that the key of compression is to allocate shorter codes for more frequent characters.
+
+Before LZSS, we would briefly illustrate its predecessor, LZ77, which is a lossless compression algorithm named after the author A. Lempel and J. Ziv as well as the publication year 1977 \cite{ziv1977universal}. It maintains a dictionary of a string buffer, and compresses the string data by representing the sub-strings as references to that in the dictionary. This dictionary slides as encoding and decoding, and is thus called a \textit{sliding window}. The references is encoded as a length-distance pair $(l,d)$, which means the following string of length $l$ is exactly the same as the characters $d$ distance behind in the uncompressed stream.
+
+However, in this design, the authors suggests all strings be encoded in the dictionary, even though it has no matches in the dictionary. A reference to 1 or 2 characters occupies more bits than the original string, and this might end up in cases where a processed data is even longer than the original one \cite{michaellz77}. To solve this, in 1982, James A. Storer and Thomas Szymanski proposed omitting such cases for better compression, and that scheme is named as LZSS \cite{storer1982data}. Besides, to indicate the difference between literals and dictionary references, LZSS also introduces a 1-bit flag to label the following data chunks. The simplified scheme is shown in Algorithm \ref{alg:\currfilebase_c} \cite{michaellz77}.
+
+\begin{Algorithm}[LZSS\label{alg:\currfilebase_c}]
+    \Input{Unencoded input}
+    \Output{Encoded output}
+    Initialize dictionary $D$
+    \cmt{Already gotten a dictionary anyway}
+
+    $output \gets$ empty
+
+    $string \gets$ part of uncoded string of maximum match length allowed
+
+    \While{input is not entirely encoded}{
+        search in $string$ for longest matching string in $D$
+
+        \uIf{match found $m$ And $m$ longer than reference}{
+            $output.add$ encoded flag $True$
+
+            $output.add$ distance and length $(d,l)$
+        }
+        \Else{
+            $output.add$ encoded flag False
+
+            $output.add$ first uncoded symbol $string[1]$
+        }
+
+        Copy symbols newly written encoded output to $D$
+
+        Shift $string$ by length of newly written encoded output
+    }
+\end{Algorithm}
+
+
+
+\subsubsection*{Decoding}
+
+The process of decoding is simply a reversion of the encoding, but to completely read a PNG file, we would need specifically designed decoders. They should first read the image head and critical data chunks which indicate the encoding details. A PNG file starts with an 8-byte signature \texttt{IHDR} as the Table \ref{tbl:\currfilebase_c} specifies \cite{W3CPNG}.
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{rlrl}
+        \toprule
+        Width & 4 bytes & Height & 4 bytes \\
+        Bit Depth & 1 byte & Color Type & 1 bytes \\
+        Compression method & 1 byte & Filter method & 1 byte \\
+        Interlace method & 1 byte & & \\
+        \bottomrule
+    \end{tabular}
+    \caption{PNG Image Head \texttt{IHDR}}
+    \label{tbl:\currfilebase_c}
+\end{table}
+
+After the header there comes a series of data chunks. A typical data chunk is made of 4 parts: 4-byte $length$ the chunk length, 4-byte chunk type/name, $length$-byte chunk data and 4-byte cyclic redundancy code/checksum (CRC) for data authentication \cite{W3CPNG}. Chunks are divided in to critical ones and ancillary ones. The critical chunks store the major information of the image for decoding, including \texttt{IHDR} the file head, \texttt{PLTE} the palette/color list, \texttt{IDAT} the image (might be split among multiple chunks) and \texttt{IEND} all-0 bytes as the image end. On the other hand, the ancillary chunks are not necessary and can be skipped if the decoder cannot understand. It involves other image information like transparency, color space, histogram, text information, time stamp and so on. 
+
+After the decoder understand the detailed ways of filtering and compression, it is only a reverse of encoding to decode the PNG data. The decoding of LZSS result is easy by using the same dictionary and decide whether to transform the string by checking the encoded flag. If encoded flag is \texttt{True}, then look up the dictionary and copy the string referred to to the current position. The Huffman encoded bit-string can also be directly recovered to the original string by looking up the codes. While filtering is just a linear combinations of the current and neighbouring pixels, and can be restored by re-calculating the bytes from the last scan line back to the first.
+
+\subsubsection*{Characters of PNG}
+
+One of the main advantages of PNG format is the minimum compression loss and the portability. Even if the size of the image is made to be small, the image quality is not damaged. Another major compressed image file format JPEG can also achieve good compression effects, but as a lossy compression method, some of the information would be definitely lost. And compared with its ascender GIF, PNG shows better compression ability in most cases.
+
+Another point is that PNG support more color as well as transparency. As in GIF and JPEG only 8-bit indexed color are allowed, while PNG offers more choices, including 8 or 16-bit per channel true color. The alpha channel in PNG also makes transparent images possible.
+
+PNG also supports addition of meta-file, that is, to add whatever text information you like to the file. It is a common practice in digital cameras and smart phones to add time stamp, location, shooting parameters, author and even copyrights. This function would be useful in some cases.
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

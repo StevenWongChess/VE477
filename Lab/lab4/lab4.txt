@@ -1,0 +1,25 @@
+VE477
+lab4 
+ID: 517370910011
+Wang Yichao
+
+2.
+The time complexity for each operation.
+MakeHeap	O(1)
+Insert		O(1)
+Minimum		O(1)
+ExtractMin	O(log n)
+Union		O(1)
+DecreaseKey	O(1)
+Delete		O(log n)
+
+3.
+Assume we implement min-heap using binary heap.
+Fibonacci will be better at insert, union, and decreaseKey.
+The idea behind is that fibonacci delay the work of union and we can use amortized analysis to make it O(1). Still, amortized does not mean faster. The disadvantage would be the super difficult implementation. (also with huge constant coeffient and large memory consumption).
+
+4.
+when the size of input is very large, where we can ignore the large constant coefficient.
+
+
+

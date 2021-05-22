@@ -1,0 +1,138 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{YOLO: You Only Look Once} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] YOLO: You Only Look Once
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] A RGB 3 channel picture
+\item [Complexity:] None
+\item [Data structure compatibility:] None
+\item [Common applications:] Artificial intelligence
+\end{overview}
+
+
+\begin{problem}{\pbname}
+Object detection is the task of detecting instances of objects of a certain class within an image. A sample of object detection is shown in Figure~\ref{fig:\currfilebase_a}.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.2]{\currfilebase_a}
+	\caption{The result of object detection}
+	\label{fig:\currfilebase_a}
+\end{figure}
+Prior detection systems \cite{ren2015faster} repurpose classifiers or localizers to perform detection. They apply the model to an image at multiple locations and scales. High scoring regions of the image are considered detections.
+
+\smallskip
+YOLO \cite{redmon2016you} uses a completely different approach where only a single neural network is applied to the full image. This network divides the image into grids and predicts bounding boxes and probabilities for each grid. These bounding boxes are weighted by the predicted probabilities.
+
+\smallskip
+YOLO has several merits. It looks at the whole image at test time so its predictions are informed by global context in the image. 
+It only uses a single network evaluation to predict unlike region-based network which require thousands for a single image. 
+This makes it extremely fast, more than 1000x faster than R-CNN \cite{girshick2015region} and 100x faster than Fast R-CNN \cite{girshick2015fast}.
+\end{problem}
+\subsection*{Description}
+\subsubsection{Detection Method}
+YOLO system cuts the input image into an $S\times S$ grid. 
+If the center of an object is in a grid cell, that grid cell will detect that object.
+Each grid cell predicts B bounding boxes and confidence
+scores for those boxes. 
+These confidence scores is an value of how confident and accurate is that the box contains an object.
+\subsubsection{Network}
+\begin{figure*}[t]
+      \centering
+        \includegraphics[width=.8\linewidth]{\currfilebase_b}
+      \caption{\small \textbf{The Architecture.} The detection network has 24 convolutional layers and 2 following fully connected layers. To be noted that $1 \times 1$ convolutional layers are alternated.}
+      \label{net}
+   \end{figure*}
+The initial convolutional layers of the network extract features from the image while the fully connected layers predict the output probabilities and coordinates.
+
+The network architecture follows the GoogLeNet model for image classification \cite{szegedy2015going}. The network has 24 convolutional layers followed by 2 fully connected layers. It alternatively use $1 \times 1$ reduction layers followed by $3 \times 3$ convolutional layers. Figure \ref{net} shows the network.
+
+\subsubsection{Training}
+It pretrains its convolutional layers on the ImageNet 1000-class competition dataset \cite{russakovsky2015imagenet}. For pretraining, only first 20 convolutional layers from Figure \ref{net} are used followed by a average-pooling layer and a fully connected layer. 
+
+\smallskip
+It then converts the model to perform detection. It adds four convolutional layers and two fully connected layers. They are randomly initialized weights. They increases the input resolution of the network from $224 \times 224$ to $448 \times 448$.
+The final layer predicts both class probabilities and bounding box coordinates. It falls between 0 and 1 by normalizing the bounding box width and height by the image width and height so that they . 
+
+\smallskip
+Leaky rectified linear activation function are used for the final layer and all other layers:
+
+\begin{equation}
+\phi(x) =
+\begin{cases}
+    x, & \text{if } x > 0\\
+    0.1x, & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+YOLO can predict multiple bounding boxes in each grid. But it only needs one bounding box predictor to be responsible for each object at training time. one predictor well be responsible for predicting an object. The assignment is based on which prediction has the best IOU with the ground truth.
+
+The following multi-part loss function will be used in training:
+\scriptsize
+\begin{align*}
+&\lambda_\textbf{coord}
+\sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+     \mathlarger{\mathcal{1}}_{ij}^{\text{obj}}
+            \left[
+            \left(
+                x_i - \hat{x}_i
+            \right)^2 +
+            \left(
+                y_i - \hat{y}_i
+            \right)^2
+            \right]
+\\
+&+ \lambda_\textbf{coord} 
+\sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+         \mathlarger{\mathcal{1}}_{ij}^{\text{obj}}
+         \left[
+        \left(
+            \sqrt{w_i} - \sqrt{\hat{w}_i}
+        \right)^2 +
+        \left(
+            \sqrt{h_i} - \sqrt{\hat{h}_i}
+        \right)^2
+        \right]
+\\
+&+ \sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+        \mathlarger{\mathcal{1}}_{ij}^{\text{obj}}
+        \left(
+            C_i - \hat{C}_i
+        \right)^2
+\\
+&+ \lambda_\textrm{noobj}
+\sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+    \mathlarger{\mathcal{1}}_{ij}^{\text{noobj}}
+        \left(
+            C_i - \hat{C}_i
+        \right)^2
+\\
+&+ \sum_{i = 0}^{S^2}
+\mathlarger{\mathcal{1}}_i^{\text{obj}}
+    \sum_{c \in \textrm{classes}}
+        \left(
+            p_i(c) - \hat{p}_i(c)
+        \right)^2
+\end{align*}
+\normalsize
+where $\mathcal{1}_i^{\text{obj}}$ denotes if object appears in cell $i$ and $\mathcal{1}_{ij}^{\text{obj}}$ denotes that the $j$th bounding box predictor in cell $i$ is responsible for that prediction.
+
+To avoid overfitting it uses dropout and extensive data augmentation. Drop out rate is $0.5$. For data augmentation, it composes random scaling and translations. Exposure and saturation will be also randomly adjusted in the HSV color space.
+
+
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+\end{document}

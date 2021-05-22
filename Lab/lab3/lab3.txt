@@ -1,0 +1,8 @@
+Lab 3
+ID 517370910011
+Wang Yichao
+
+Time complexity analysis:
+In the homework, both two implementations are greedy and not correct. However, the time complexity will be linear since it is super cheap. In my implementation uploaded to joj, the time complexity is very high due to dynammic programming. It is about exponential time depending on the size of the set. Since there are 2^n subsets for an set with n elements, we have to go expensive since it is an NP hard problem. However, we should use approximate algorithm in real life.
+
+

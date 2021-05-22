@@ -1,0 +1,117 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Vertex independent set} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] greedy algorithm~(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] An undirected graph $G(V,E)$
+\item [Complexity:] $\mathcal{O}(n^3)$
+\item [Data structure compatibility:] Graph can be represented by either adjacency matrix(dense graph) or adjacency list(sparse graph)
+\item [Common applications:] Theory computer science
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	Given an undirected graph $G(V,E)$, and a subset $V'$ of $V$ is vertex independent set if and only if for any two different nodes $u$, $v$ in $V'$, there is no edge between them. 
+\end{problem}
+
+
+\subsection*{Description}
+
+We have studied the clique problem in the homework. Vertex independent set problem, however, is somewhat the opposite of clique. We have an undirected graph $G(V,E)$, a subset $V'$ of $V$ is called vertex independent set if and only if for any two different nodes $u$, $v$ in $V'$, there is no edge between them.  \newline
+
+Moreover, we are interested in maximal independent set(MIS) as well. Here MIS is defined as the vertex independent set with largest cardinality in the graph. We are interested in finding algorithms to find such an MIS. \newline
+
+MIS problem has many theoretical applications and can be used to prove the time complexity of many other theoretical problems in the field of theory computer science. For example, we can use the linear programming(LP) knowledge we learned from lab 8 and transform the MIS problem into its dual which is minimum set cover(MSC) problem. Usually we can reduce some hard problem to the MIS and prove its complexity. \newline
+
+We first try with brute force. Assume there are n nodes in the graph. We need to list all the possibilities of choosing nodes in the graph. You can either choose a node or not. There should be $\mathcal{O}(2^n)$ choices. After choosing, we need to test all the edges between them, which takes $\mathcal{O}(n^2)$ time because there are $n^2/2$ pairs to check. The pseudo code is in the first algorithm below. In 2017, it has been proved that there exists an exact algorithm for MIS with time complexity of $\mathcal{O}(1.1996^n)$ using polynomial space, where n is the size of nodes in the graph\cite{xiao2017exact}. Although this method is much better than brute force, it is still unachievable to get an exact answer for the problem. To tackle the MIS problem, we need to go with approximation algorithms. \newline
+
+One good choice is to go with greedy. We choose the node $v$ with smallest degree and add to a set. After that, we delete all the neighbors of $v$ from the graph $G$. We repeat this until $G$ becomes empty. The pseudo code is in the second algorithm below. To find the node with maximum degree, we need to check all the edges, which takes $\mathcal{O}(n^2)$. Then we need to do this for $\mathcal{O}(n)$ nodes in worst case. Thus the overall time complexity for greedy is $\mathcal{O}(n^3)$. The polynomial time complexity is quite satisfactory for us, but the sad story is that we have no guarantee on the quality of the MIS we get using greedy algorithm. It is proved by Bazgan in 2004 that the MIS problem is Poly-APX-complete and thus no approximation algorithm can achieve a constant factor in polynomial time\cite{bazgan2005completeness}.
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[brute force\label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{An undirected graph $G(V,E)$}
+	\Output{$MIS$ of $G(V,E)$}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	\BlankLine
+	$n = |V|$
+
+	$MIS = 0$
+
+	$size = 0$
+
+	\For {$i = 0; i< 2^n; i++$}{
+		correct = True
+
+		represent $i = a_1, a_2, \cdots, a_n$ in base 2
+
+		\For {$j = 1; j < n+1; j ++$}{
+			\For {$k = 1; k < n+1; k ++$}{
+				\If {$a_j$ and $a_k$ and $(j,k) \in E$}{
+					correct = False
+				}
+			}
+		}
+		\If {correct and $sum(a_1, a_2, \cdots, a_n) > size$}{
+			$size = sum(a_1, a_2, \cdots, a_n)$
+
+			$MIS = i$
+		}
+
+	}
+	
+	\Ret $S$
+
+\end{Algorithm}
+
+
+\begin{Algorithm}[greedy algorithm\label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{An undirected graph $G(V,E)$}
+	\Output{MIS of $G(V,E)$}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	\BlankLine
+	$S = \varnothing$
+	\While {$G$ is not empty}{
+		$v$ be node of minimum degree in $G$
+
+		$S = S \cup v$
+
+		remove $v$ and its neighbours from $G$
+	}	
+
+	\Ret $S$
+
+\end{Algorithm}
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

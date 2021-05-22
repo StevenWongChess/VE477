@@ -1,0 +1,134 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Gradient descent} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Gradient Descent(algo.~\ref{alg:\currfilebase_a}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] A vector
+\item [Complexity:] None.
+\item [Data structure compatibility:] None
+\item [Common applications:] Artificial intelligence
+\end{overview}
+
+
+\begin{problem}{\pbname}
+The purpose of optimization is to minimize our target function, for example,
+\begin{equation}
+	\min f(x)
+	\label{eqn:\currfilebase_a}
+\end{equation}
+However, for some large scale function, analytical solution $x^\star = (A^{\mathrm{T}}A)^{-1}A^TY$ is unsolvable and time consuming ($\mathcal{O}(n^3)$). So the descent method is raised to solve optimization.
+\end{problem}
+\subsection*{Description}
+\subsubsection{Descent Method}
+To solve equation~\ref{eqn:\currfilebase_a}, a sequence of points $x^{(k)}$ is produced to  approach the optimum.
+\begin{equation}
+x^{(k+1)} = x^{(k)} + t^{(k)}\Delta x^{(k)}\quad\text{with}\quad f\left(x^{(k+1)}\right) < f\left(x^{(k)}\right)
+\end{equation}
+The general descent method is shown in Algorithm~\ref{alg:\currfilebase_a}
+\begin{Algorithm}[General descent method\label{alg:\currfilebase_a}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{a starting point $x\in \textbf{dom}\ f$}
+	\Output{optimal $x$ to minimize $f(x)$}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	\While{Stopping criterion is not satisfied}{
+	Determine a descent direction $\Delta x$.\\
+	Line search. Choose a step size $t>0$.\\
+	Update. $x = x + t\Delta x$
+	}
+	\BlankLine
+
+	\Ret $x$
+\end{Algorithm}
+\subsubsection{Gradient Descent Algorithm}
+In this section, we will decide the direction $\Delta x$ in Algorithm\ref{alg:\currfilebase_a}. From convexity
+\begin{equation}
+f\left(x^{(k+1)}\right) \leq f\left(x^{(k)}\right) + \nabla f\left(x^{(k)}\right)\Delta x^{(k)}
+\end{equation}
+So, 
+\begin{equation}
+f\left(x^{(k+1)}\right) < f\left(x^{(k)}\right) \Rightarrow \nabla f\left(x^{(k)}\right)\Delta x^{(k)} < 0
+\end{equation}
+A natural choice is gradient: $\Delta x^{(k)} = \nabla f\left(x^{(k)}\right)$.
+\subsubsection{Line Search: Backtracking}
+This section will find the step size $t$. $t$ can be described by
+\begin{equation}
+t = \text{argmin}_t f(x+t\Delta x)
+\end{equation}
+We use two parameters $\alpha\in (0, 0.5)$, $\beta \in (0,1)$. Starting from $t=1$, repeat $t = \beta t$ until
+\begin{equation}
+f(x+t\Delta x) < f(x) + \alpha t \nabla f(x)^{\mathrm{T}}\Delta x
+\end{equation}
+See Figure~\ref{fig:\currfilebase_a}.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{\currfilebase_a}
+	\caption{Backtracking}
+	\label{fig:\currfilebase_a}
+\end{figure}
+\subsubsection{Constrained Optimization}
+Consider the following optimization problems that include inequality constraints, 
+\begin{equation}
+\label{eqn:\currfilebase_b}
+\begin{array}{ll}
+\mbox{minimize}   & f_0(x) \\
+\mbox{subject to} & f_i(x)\leq 0,\quad i=1,\cdots,m\\
+&Ax=b
+\end{array}
+\end{equation}
+We use central path. The equivalent problem of problem~\ref{eqn:\currfilebase_b} is
+\begin{equation}
+\label{eqn:\currfilebase_c}
+\begin{array}{ll}
+\mbox{minimize}   & t f_0(x)+\phi(x) \\
+\mbox{subject to} & Ax=b
+\end{array}
+\end{equation}
+which has the same minimizers. We assume problem~\ref{eqn:\currfilebase_c} can be solved by GD and has the unique solution for any $t>0$. We use $x^\star(t)$ to denote the solution to problem~\ref{eqn:\currfilebase_c}, and we call it central point. We define the set of $x^\star(t)$ the central path. $x^\star(t)$ should satisfy,
+\begin{equation}
+Ax^\star(t) = b. \quad f_i(x^\star(t)) < 0, \quad i=1,2,\cdots, mao
+\end{equation}
+There exits $\hat{\nu}\in R^p$
+\begin{align}
+\label{eqn:\currfilebase_d}
+0 &=t\nabla f_0(x^\star(t)) + \nabla\phi(x^\star(t)) + A^T\hat{\nu}\\
+&=t\nabla f_0(x^\star(t)) + \sum_{i=1}^m\frac{1}{-f_i(x^\star(t))} + A^T\hat{\nu}
+\end{align}
+A geometric explanation is shown in Figure~\ref{fig:\currfilebase_b}.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=1]{\currfilebase_b}
+	\caption{Central path for an LP with n = 2 and m = 6}
+	\label{fig:\currfilebase_b}
+\end{figure}
+%Detailed description of the problem; More detailed information on the input and complexity; more applications with details on how they relate to each other (if this is the case). Do not hardcode references,  instead use the {\tt \textbackslash label} and {\tt \textbackslash reference} commands.  Examples: citation~\cite{ve477}, a group of figures (Fig.~\ref{fig:\currfilebase_group}), a sub-figure (Fig.~\ref{fig:\currfilebase_a}). To display a new line skip a line in the source code, do not use {\tt \textbackslash\textbackslash}.
+
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

@@ -1,0 +1,230 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Matrix multiplication} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] Naive~(algo.~\ref{alg:\currfilebase_a}~\&~alg:\ref{alg:\currfilebase_b}), Strassen~(algo.~algo.~\ref{alg:\currfilebase_c})
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] Matrices
+\item [Complexity:] $\mathcal{O}(n^\omega)$, with $2<\omega$
+\item [Data structure compatibility:] Array (2D matrix)
+\item [Common applications:] All kinds of calculation missions in Mathematics, Physics, Engineering, etc.
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	The multiplication between matrices is a common calculation mission. A naive way to calculate it according to the definition of matrix multiplication is of high complexity. Therefore several algorithms of better complexity performances are proposed, which gradually cut the time complexity to a polynomial of lower power. The basic ideas of those algorithms will be discussed here.
+\end{problem}
+
+
+\subsection*{Description}
+
+Firstly recall the definition of matrix multiplication. Given 2 matrices $A$, $B$ of size $m\times p$, $p\times n$, their product $M$ is a $m\times n$ matrix with elements
+$$
+M_{ij} = \sum_{k=1}^p A_{ik}B_{kj}
+$$
+for any $1\leq i\leq m$ and $1\leq j \leq n$. Therefore the most instinctive method is calculate the elements in $M$ one by one.
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Naive (Iteration)\label{alg:\currfilebase_a}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{matrices $A$ of $m\times p$ and $B$ of size $p\times n$}
+	\Output{matrix $M$ the product of $A$ and $B$}
+    \BlankLine
+    \For{i for 1 to m}{
+        \For{j for 1 to n}{
+            $M_{ij}\gets 0$
+
+            \For{k for 1 to p}{
+                $M_{ij} \gets M_{ij} + A_{ik}B_{kj}$
+            }
+        }
+    }
+
+	\Ret{$M$}
+\end{Algorithm}
+
+It is easy to see that the Algo. \ref{alg:\currfilebase_a} cost $\Theta(mpn)$. For purpose of generality, we may assume the both matrices are square matrices of size $n\times n$, and the time complexity is then $\mathcal{O}(n^3)$.
+
+There is an \textit{divide-and-conquer alternative} for it, based on which further improvements are possible. The basic idea here is \textit{block partition}, to keep on splitting the original large matrices into halves so as to consecutively divide the problem into multiplications of $2\times 2$ square matrices. Suppose $C=AB$, where
+$$
+C = 
+\begin{bmatrix}
+    C_{11} & C_{12} \\ 
+    C_{21} & C_{22} 
+\end{bmatrix}
+,A=
+\begin{bmatrix}
+    A_{11} & A_{12} \\ 
+    A_{21} & A_{22} 
+    \end{bmatrix}
+,B=
+\begin{bmatrix}
+    B_{11} & B_{12} \\ 
+    B_{21} & B_{22} 
+\end{bmatrix}
+.
+$$
+and we may calculate $C$ in the way of
+$$
+\begin{bmatrix}
+    C_{11} & C_{12} \\ 
+    C_{21} & C_{22} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+    A_{11} B_{11}+A_{12} B_{21} & A_{11} B_{12}+A_{12} B_{22} \\
+    A_{21} B_{11}+A_{22} B_{21} & A_{21} B_{12}+A_{22} B_{22}
+\end{bmatrix}
+$$
+It means that we only need to calculate $4$ smaller-size multiplications and $n^2$ additions. The complexity is then given by recurrence
+$$
+\left\lbrace
+\begin{aligned}
+    T(1) &= \Theta(1) \\
+    T(n) &= 8T(n/2) + \Theta(n^2)
+\end{aligned}
+\right.
+$$
+We can see that the time complexity is $\mathcal{O}(n^3)$ according to Master Theorem, which the same as the iteration method. The pseudocode is given in Algo. \ref{alg:\currfilebase_b}
+
+\begin{Algorithm}[Name\label{alg:\currfilebase_b}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	\SetKwFunction{fun}{Multi}	
+	\Input{$n\times n$ square matrices $A$, $B$}
+	\Output{$M$ the product of $A,B$}
+	\BlankLine
+    \Fn{\fun{$A,B$}}{
+        \lIf{$A, B$ is $2\times 2$}{
+            \Ret{$AB$}  \cmt{8 scalar multiplications}
+        }
+        
+        divide 
+        $A = 
+        \begin{bmatrix}
+            A_{11} & A_{12}\\
+            A_{21} & A_{22}
+        \end{bmatrix}
+        ,B = 
+        \begin{bmatrix}
+            B_{11} & B_{12}\\
+            B_{21} & B_{22}
+        \end{bmatrix}$
+
+        $M_1 \gets Multi(A_{11}, B_{11})$
+
+        $M_2 \gets Multi(A_{12}, B_{21})$
+
+        $M_3 \gets Multi(A_{11}, B_{12})$
+
+        $M_4 \gets Multi(A_{12}, B_{22})$
+        
+        $M_5 \gets Multi(A_{21}, B_{11})$
+
+        $M_6 \gets Multi(A_{22}, B_{21})$
+
+        $M_7 \gets Multi(A_{21}, B_{12})$
+
+        $M_8 \gets Multi(A_{22}, B_{22})$
+
+        calculate 
+        $C =
+        \begin{bmatrix}
+            M_1 + M_2 & M_3 + M_4\\
+            M_5 + M_6 & M_7 + M_8\\
+        \end{bmatrix}$
+    }
+
+    \Ret{$C$}
+
+\end{Algorithm}
+
+Strassen Algorithm is named after Volker Strassen, proposed in 1969, it is one of the important tries to decrease the matrix multiplication complexity \cite{strassen1969gaussian}. Although the improvement of Strassen Algorithm is limited, it inspires later inventions of better algorithms. The basic idea of Strassen Algorithm is similar to that of divide-and-conquer scheme, but cut the number of sub-problems in each layer of recursion. With the same background settings as in Algo. 2, the calculation is altered as in Algo. 3.
+
+\begin{Algorithm}[Strassen\label{alg:\currfilebase_c}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	\SetKwFunction{fun}{Multi}	
+	\Input{$n\times n$ square matrices $A$, $B$}
+	\Output{$M$ the product of $A,B$}
+	\BlankLine
+    \Fn{\fun{$A,B$}}{
+        \lIf{$A, B$ is $2\times 2$}{
+            \Ret{$AB$}  \cmt{8 scalar multiplications}
+        }
+        
+        divide 
+        $A = 
+        \begin{bmatrix}
+            A_{11} & A_{12}\\
+            A_{21} & A_{22}
+        \end{bmatrix}
+        ,B = 
+        \begin{bmatrix}
+            B_{11} & B_{12}\\
+            B_{21} & B_{22}
+        \end{bmatrix}$
+
+        $M_1 \gets Multi(A_{11} + A_{22}, B_{11} + B_{22})$
+
+        $M_2 \gets Multi(A_{21} + A_{22}, B_{11})$
+
+        $M_3 \gets Multi(A_{11}, B_{12} - B_{22})$
+
+        $M_4 \gets Multi(A_{22}, B_{21} + B_{11})$
+        
+        $M_5 \gets Multi(A_{11} + A_{12}, B_{22})$
+
+        $M_6 \gets Multi(A_{21} - A_{11}, B_{11} + B_{12})$
+
+        $M_7 \gets Multi(A_{12} - A_{22}, B_{21} + B_{22})$
+
+        calculate 
+        $C =
+        \begin{bmatrix}
+            M_1 + M_4 - M_5 + M_7 & M_3 + M_5\\
+            M_2 + M_4 & M_1 - M_2 + M_3 + M_6\\
+        \end{bmatrix}$
+    }
+
+	\Ret{$C$}
+
+\end{Algorithm}
+
+Now the recurrence is
+$$
+\left\lbrace
+\begin{aligned}
+    T(1) &= \Theta(1) \\
+    T(n) &= 7T(n/2) + \Theta(n^2)
+\end{aligned}
+\right.
+$$
+and hence the complexity is $\mathcal{O}(n^{\log_27}) = \mathcal{O}(n^{2.807})$. Although the calculation process is more complicated compared to naive algorithms, Strassen Algorithm has better performances in cases where $n > 100$ \cite{bender2008improved}.
+
+Since any algorithm managing to deal with matrix multiplication has to traversal all the $n^2$ entries in two matrices, the time complexity of matrix multiplication algorithm has a lower bound $\mathcal{O}(n^2)$. Setting the $\mathcal{O}(n^3)$ naive algorithm has baseline, we can express the time complexity of all matrix multiplication algorithms as $\mathcal{O^\omega}$, where $\omega$ is called the exponent of matrix multiplication, which is a number between 2 and 3. The lowest known $k$ is achieved by François Le Gall with Coppersmith–Winograd algorithm, which is 2.3728639 \cite{le2014powers}.
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

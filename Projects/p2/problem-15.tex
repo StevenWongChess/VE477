@@ -1,0 +1,101 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{Generating Partitions} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] name~(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] An positive integer n
+\item [Complexity:] $\mathcal{O}(n^2)$
+\item [Data structure compatibility:] N/A
+\item [Common applications:] The Durfee square can be used to prove many partition identities in the field of combinatorics.
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	Given an positive integer n, we want to find the number of different tuples $(a_1, a_2, ..., a_k)$, such that two constrains are satisfied. Firstly, $a_1 + a_2 + ..., a_k = n$. Secondly, $a_1 \geq a_2 \geq ... \geq a_k > 0$\cite{part}. 
+
+\end{problem}
+
+\subsection*{Description}
+
+	\textbf{A first look at the problem}
+
+	Given an positive integer n, we want to find the number of different tuples $(a_1, a_2, ..., a_k)$, such that two constrains are satisfied. Firstly, $a_1 + a_2 + ..., a_k = n$. Secondly, $a_1 \geq a_2 \geq ... \geq a_k > 0$. Some variation of this problem can be find by setting additional constrains like k is even number. We define a partition function $p(n)$ as the number of tuples we find in the problem. In this paper, we will focus on the partition problem without additional constrins to make our life easier. For example, we can find out there are only one partition (1) for $n = 1$. For $n = 5$, there are 7 partitions, (1, 1, 1, 1, 1), (1, 1, 1, 2), (1, 1, 3), (1, 4), (1, 2, 2), (5), (2, 3). Here we define part as the summand in each partition, for example $1 + 1 + 3$ is the part for tuple (1, 1, 3). The order of elements in the tuples does not matter in our problem.
+
+	\textbf{The idea of this algorithm}
+
+	To save time for future calculation, we use dynamic programming to store the values used in former calculation. Notice that in the for loop, for example, we can use the value of array[j - i]. This is quite similar to Bellman-ford that we learned in chapter 4 of the slides\cite{ve477}.
+
+	\textbf{Time complexity}
+
+	In this algorithm, there are two levels of for loops, the time complexity is $\mathcal{O}(n) \times \mathcal{O}(n) = \mathcal{O}(n^2)$, the first loop to set the value of array does not matter. Comparing to the size of input, which is $\mathcal{O}(\log n)$, the time complexity would be exponential. Some approximation algorithms are proposed to obtain the value with less accuracy within polynomial time. Also we can directly calculate the asymptotics of the number by $$
+\log p(n) \sim C \sqrt{n}
+$$
+where C is a constant and $C=\pi \sqrt{\frac{2}{3}}$\cite{andrews1998theory}. 
+
+Or we can express the formula in another way as $$
+p(n) \sim \frac{1}{4 n \sqrt{3}} \exp \left(\pi \sqrt{\frac{2 n}{3}}\right)
+$$.
+
+
+	\textbf{Another way to tackle this problem}
+
+	We can use generating function to calculate the value as well\cite{note}. $$\sum_{n=0}^{\infty} q(n) x^{n}=\prod_{k=1}^{\infty}\left(1+x^{k}\right)=\prod_{k=1}^{\infty} \frac{1}{1-x^{2 k-1}}$$, by using this equation, we can get the number of partition by writing down the coefficient before the term $x^n$. For example, to find the number of partitions when $n = 8$, we need to calculate $$
+\begin{array}{c}
+\left(1+x+x^{2}+x^{3}+x^{4}+x^{5}+x^{6}+x^{7}+x^{8}\right)\left(1+x^{2}+x^{4}+x^{6}+x^{8}\right)\left(1+x^{3}+x^{6}\right) \\
+\left(1+x^{4}+x^{8}\right)\left(1+x^{5}\right)\left(1+x^{6}\right)\left(1+x^{7}\right)\left(1+x^{8}\right) \\
+=1+x+2 x^{2}+3 x^{3}+5 x^{4}+7 x^{5}+11 x^{6}+15 x^{7}+22 x^{8}+\cdots+x^{56}
+\end{array}
+$$
+
+Then we can get the number by reading the coefficient of $x^8$, which is 22.
+
+\textbf{Further application}
+
+We can define the rank of a certain partition of the positive integer n as the largest integer k so that we have at least k numbers in partition that is greater or equal to k. Furthermore, two diagrams, namely Ferrers diagram and Young diagram are used for visualization representation of this kind of problem. Durfee square can be defined as the $k\times k square counting from the largest element in the partition$, where k stands for the rank we give.
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Partition\label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{a positive integer n}
+	\Output{the number of partition, where partition is defined in problem definition}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	int array[n]
+	\For {$int i = 1; i <= n; i++$}{
+		array[i] = 1
+	}
+	\For {$int i = 1; i <= n; i++$}{
+		\For {$int j = i; j <= n; j++$}{
+			array[j] = array[j] + array[j - i]
+		}
+	}
+	\Ret array[n]
+
+\end{Algorithm}
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

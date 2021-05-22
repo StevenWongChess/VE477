@@ -1,0 +1,85 @@
+\documentclass[catalog.tex]{subfiles}
+
+% do not write anything in the preamble
+
+\begin{document}
+
+\def\pbname{GCD and Bezout’s identity} %change this, do not use any number, just the name
+
+\section{\pbname} 
+
+% only for overview, so short description (no more than 1-2 lines)
+\begin{overview}
+\item [Algorithm:] name~(algo.~\ref{alg:\currfilebase}) 
+	% -	must match the label of the algorithm 
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+\item [Input:] two integers $a$ and $b$
+\item [Complexity:] complexity of the algorithm, e.g. $\mathcal{O}(\log a)$
+\item [Data structure compatibility:] N/A 
+\item [Common applications:] Number theory
+\end{overview}
+
+
+\begin{problem}{\pbname}
+	Given two integers $a$ and $b$, calculate the GCD of $a$ and $b$ as d. Bezout's identity is that there exist two integers $x$ and $y$ such that $ax+by = d$.
+\end{problem}
+
+\subsection*{Description}  
+
+\textbf{1. Bezout's identity}\newline
+
+Bezout's identity is a fundamental theorem in the field of number theory, which is described as follow: given two integers $a$ and $b$, assume the greatest common divider(GCD) of them is $d$, there exist two integers $x$ and $y$, such that $ax + by = d$. \newline
+
+I will give my own proof here. Since the GCD of $a$ and $b$ is d, we can assume $a = d\times p$ and $b = d\times q$, where $(p, q) = 1$. Then we need to find $x$ and $y$ such that $px + qy = 1$. This is equivalent to $p|qy - 1$, which is to find y such that $qy\equiv 1\mod p$. Since $(y, p) = 1$, we can always find such $q$. Qed. In the last step we can also let $q = 0, 1, \cdots, p - 1$, then for these $q$, $qy \equiv r \mod p$. $r$ is different as $q$ becomes different. So there must be a $q$ such that $qy \equiv 1 \mod p$.\newline
+
+Notice that Bezout's identity can be generalized into more than two integers. Given $n$ integers $a_1,a_2,\cdots, a_n$, assume the GCD of them is $d$, then there exists integers $x_1, x_2,\cdots, x_n$, such that $d = a_1x_1 + a_2x_2 + \cdots + a_nx_n$. The proof using induction is not as straightforward as the proof for two-integer case. For finite field, we have similar Bezout's identity. Example of calculating GCD on finite field can be found in the slides provided on Friday's VE477 lecture\cite{ve477}. \newline
+
+This is my own naive proof using induction. For input of size two, we have already proved above. Now assume Bezout's identity is true for $k$ inputs, and we need to prove that it is also true for $k + 1$ inputs. Assume the $k+1$ inputs are $a_1, a_2, \cdots, a_k, a_{k+1}$, GCD of first $k$ inputs as $d$, GCD of first $k+1$ inputs as $e$, it is obvious that we can write $d = e\times f$ and $(a_{k+1}, f) = 1$. Using the induction hypothesis, there exists $x_1, x_2, \cdots, x_k$, such that $a_1x_1+a_2x_2+\cdots+a_kx_k = d$. We only need to find $x_{k+1}$ such that $d + a_{k+1}x_{k+1} = e$. This is equivalent to $f + \frac{a_{k+1}}{e} x_{k+1} = 1$, since $(a_{k+1}, f) = 1$, because of the Bezout's identity with 2 inputs, there exist such $x_{k+1}$, Qed. For proof in finite field, maybe in the final exam, who knows.\newline
+
+\textbf{2. GCD}\newline
+
+When we need to take advantage of the Bezout's identity, we need to calculate the GCD of two different integers first. Here GCD problem is that given two integers $a$ and $b$, calculate the largest positive integer $d$ such that $d$ divide both $a$ and $b$. Notice that we can define the GCD of more than two integers in a similar way. The commonly used algorithm for calculating GCD is Euclidean algorithm. Other common applications of GCD are extended Euclidean algorithm, 	linear Diophantine equations, and Chinese remainder theorem. \newline
+
+Euclidean algorithm is based on subtracting the smaller input from the larger one until one of the input becomes zero. We can speed up the process by using division instead of subtraction in some cases. The number of divisions required for Euclidean algorithm is $\mathcal{O}(\log (min(a,b)))$, where $a$, $b$ are the input integers\cite{grossman1924discussions}. Thus we have the time complexity of $\mathcal{O}(\log (min(a,b)))$. \newline
+
+
+
+% add comment in the pseudocode: \cmt{comment}
+% define a function name: \SetKwFunction{shortname}{Name of the function}
+% use the defined function: \shortname{$variables$}
+% use the keyword ``function'': \Fn{function name}, e.g. \Fn{\shortname{$var$}}
+\begin{Algorithm}[Euclidean algorithm \label{alg:\currfilebase}]
+	% -	must match the reference in the overview
+	% - when writing more than one algo use alg:\currfilebase_a, alg:\currfilebase_b, etc.
+	%\SetKwFunction{myfunction}{MyFunction}	
+	\Input{two integers $a$ and $b$}
+	\Output{the GCD of $a$ and $b$}
+	%	\Fn{\myfunction{$a,b$}}{
+	%	}
+	\BlankLine
+	\While {$b \neq 0$}{
+		\If {$a > b$}{
+			$a \equiv tmp \mod b$
+
+			$a = tmp$
+		}
+		\Else{
+			$b \equiv tmp \mod b$
+			
+			$b = tmp$
+		}
+	}
+	\Ret $a$
+\end{Algorithm}
+
+
+% include references where to find information on the given problem using latex bibliography
+% insert references in the text (\cite{}) and write bibliography file in problem-nb.bib (replace nb with the problem number)
+% prefer books, research articles, or internet sources that are likely to remain available over time
+% as much as possible offer several options, including at least one which provide a detailed study of the problem
+% if available include links to programs/code solving the problem
+% wikipedia is NOT acceptable as a unique reference
+\singlespacing
+\printbibliography[title={References.},resetnumbers=true,heading=subbibliography]
+
+\end{document}

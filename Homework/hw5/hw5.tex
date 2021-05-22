@@ -1,0 +1,202 @@
+%!TeX spellcheck = en-US
+\documentclass{article}
+\usepackage{bookmark}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}  
+\usepackage{algorithm}  
+\usepackage{algorithmicx}  
+\usepackage{algpseudocode} 
+\usepackage{forest}
+\newcommand{\bigO}{\mathcal{O}}
+\usepackage{listings}
+ 
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  
+\renewcommand{\algorithmicensure}{\textbf{Output:}}  
+
+\begin{document}
+\noindent
+
+%========================================================================
+\noindent\framebox[\linewidth]{\shortstack[c]{
+\Large{\textbf{VE 281 Exam}}\vspace{1mm}\\
+Wang Yichao, ID: 517370910011}}
+
+\begin{itemize}
+
+\item \textbf{Exercise 1.}
+
+1. In linear partition problem, we need to divide a chain into several groups and try to minimize the maximum of the sum of each group.
+
+2. No. For example if we divide according to average size for $\{1, 2, 3, 6\}$, we get 9. However, there do exist one division $\{1, 2, 3\}$ and $\{6\}$ that leads to 6.
+
+3. Assume that the chain S has n elements. Then $M(n, k) = \min{( \max_{i = 1}^{n} (M(n-i, k-1), sum\ of\ the\ last\ i\ elements))}$.
+
+4. The complexity would be factorial because we need to call M for n times, which leads to $n!$.
+
+5. The M values that is prior to M(n, k) can be stored to save time and space.
+
+6. \begin{algorithm}[H]  
+    \caption{dynamic programming}  
+    \begin{algorithmic}[1]  
+        \Require n elements from $s_1$ to $s_n$ and k is the number of ranges
+        \Ensure M(n, k), which is the minimum of the cost of the largest sum of elements in all the division groups.
+
+        \For {$int\ i = 1; i < k+1; i++$} 
+            \State M(1, k) = $s_1$
+        \EndFor
+        \State M(0, 1) = 0
+        \For {$int\ i = 1; i < n+1; i++$}  
+            \State M(i, 1) = M(i-1, 1) + $s_i$
+        \EndFor
+
+        \For {$int\ i = 2; i < n+1; i++$}  
+            \For {$int\ j = 2; i < k+1; j++$}  
+                M(i, j) = $+\infty$
+                \For {$int\ k = 1; k < i; k++$}  
+                    \State $M(i, j) = \min{(M(i, j), \max{(M(k, j-1), s[i] - s[k])})}$
+                \EndFor      
+            \EndFor
+        \EndFor
+       
+    \end{algorithmic}  
+\end{algorithm}
+
+7. The idea is similar to recursion, we only use the table to store M(i,j), so it should still be correct. In a maths course, we can use induction to prove it. Basically we only need to focus on the min and max in the loop. We should be safe.
+
+8. The complexity depends on the loops, so the time complexity should be $\bigO(k) + \bigO(n) + \bigO(n\times k\times n) = \bigO(kn^2)$.
+
+9. We create a partition table just like M in dynamic programming, and update the partition when we change the value of corresponding M.
+
+\item \textbf{Exercise 2.}
+
+To fulfill the range 0-7, we should run the box B twice. First is used to decide $n\equiv ? \mod 4$(if the result of B is 4, just run again until result is not 4), the second should decide whether it is larger than 3 or not. For example, we can regard 0 and 1 as larger, while 2 and 3 as not larger. Then we can generate random number in 0-7.
+
+There is no restriction on n. The essence of this this question is the binary representation. But we can go with 5 base as well. It is obvious that every natural number can be represented using base 5. After that we use the 0-4 generator to generate each digit of this number in base 5.(m row for a m-digit n). Something may go wrong with the MSB. For example, if $n = 10$, or 20 in base 5. But we row the 0-4 dice and get something like 21 in base 5(which means out of range or larger than n). In this case, we should row all the dices again. Notice that we are expected to row for 5 times at most before getting it in range. However, the worst case is not guaranteed(but we can live with it). The uniform randomness is obvious.
+
+Here is the algorithm.
+
+\begin{algorithm}[H]  
+    \caption{random generator}  
+    \begin{algorithmic}[1]  
+        \Require the number n which indicates the range $0\to n$
+        \Ensure A random number generated between the range $0\to n$
+
+        \State $digits = \lceil (\log_5 n) + 1 \rceil$
+        \State $result = +\infty $ 
+        \While {$result > n$}
+            \State Run the $0\to 4$ generator for digits times
+            \State Assume the numbers in last step are $d_1$ to $d_{digits}$
+            \State  $result = \sum_{n=1}^{digits} (d_n \times 5^{n-1})$
+        \EndWhile
+        \State \Return result
+    \end{algorithmic}  
+\end{algorithm}
+
+\item \textbf{Exercise 3.}
+A naive approach. Notice that the length of negative circle will lead to smaller and smaller distance in Bellman-Ford algorithm. Another point is that the length of a cycle is less than $|V|$(assume $|V|$ points in graph).
+
+Warning: The cost can be very big. If there is a negative cycle that is unconnected to the starting point we choose in Bellman-Ford, my naive algorithm will return false though there do exist a negative cycle. So we should do something learned in VE444 textbook and divide the given graph into several directed connected components, which is beyond the scope. 
+
+Another approach to cope with the warn is simple run my naive algorithm for $|V|$ times, each time we choose a different vertex so that we will not miss any negative cycle unconnected. There is a negative cycle if and only if all $|V|$ times we return False in naive.
+
+\begin{algorithm}[H]  
+    \caption{naive}  
+    \begin{algorithmic}[1]  
+        \Require A graph G(V, E)
+        \Ensure A bool value that decide if there is a negative cycle.
+
+        \State Run the Bellman-Ford once($|V|$ columns)
+        \State We can get an $|V|\times |V|$ table.
+        \State Run the Bellman-Ford once again(another $|V|-1$ rounds)
+        \State We can get another $|V|-1\times |V|$ table.
+        \State Then we compare the $|V|$th column and the ($2|V| - 1$)th column  
+        \If {the value decreases}
+            \State \Return True
+        \EndIf
+        \State \Return False
+
+    \end{algorithmic}  
+\end{algorithm}
+
+\item \textbf{Exercise 4.}
+
+ignored this time
+
+\item \textbf{Exercise 5.}
+I will suppose that the Euclidean metric is used to calculate the distance. Please check the pseudo code below.
+
+\begin{algorithm}[H]  
+    \caption{naive}  
+    \begin{algorithmic}[1]  
+        \Require k Internet hostspots(with position $p_1, ..., p_k$), a range parameter r, a load L that represent the max number of users can be connected to a single hostspot, n clients(with position $q_1, ... q_n$). 
+        \Ensure Whether all clients can be satisfied(arranged to a hostspot).
+
+        \For {$int\ i = 1; i < n+1; i++$} 
+            \For {$int\ j = 1; j < k+1; j++$} 
+                \If {$(metric(q_i, p_j) \leq r$}
+                    \State connect $q_i$ and $p_j$
+                \EndIf
+            \EndFor
+        \EndFor
+
+        \State So we now have a graph G with k hostspots and n clients with edge between indicating if they can be connected. 
+        \State Now we add a source and destination to transfer the problem into a network flow problem. 
+
+        \For {$int\ i = 1; i < n+1; i++$} 
+            \State connect source to $q_i$, set the capacity to be 1
+        \EndFor
+        \For {$int\ i = 1; i < k+1; i++$} 
+            \State connect $p_i$ to destination, set the capacity to be L
+        \EndFor
+
+        \For {each connected edge between client and hostspot}
+            \State set the capacity to be 1
+        \EndFor
+        \State $max\_flow = EdmondsKarp(G)$
+        \State \Return $max\_flow == n $
+    \end{algorithmic}  
+\end{algorithm}
+
+correctness:
+
+Since the flow out of source is at most n(just add n edges with capacity 1 up). So either the $max\_flow$ is n or smaller than n. We will discuss these two cases.
+
+If $max\_flow == n$, we have a flow that satisfy the load constrain L and there is a flow out of each edge from source, which means that every client is connected.
+
+If $max\_flow < n$, then we have at least an edge out of source that has no flow. However, for our graph, 
+
+complexity:
+In my first step, loop in loop to connect the clients with hostspots. So $\bigO(n\times k)$. The two loops that deal with source and destination node does not matter at all. In the end the Edmonds-Karp algorithm is the most expensive, according to the slides, the time complexity is $\bigO (|V||E|^2)$, in our case, this is $\bigO((n+k)n^2k^2)$. So in total the time complexity would be $\bigO((n+k)n^2k^2)$. 
+
+Note: (Integer linear programming can not be used)
+
+
+\end{itemize}
+
+%========================================================================
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

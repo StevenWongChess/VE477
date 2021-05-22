@@ -1,0 +1,220 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{1}
+  \datalist[entry]{nty/global//global/global}
+    \entry{agrawal2004primes}{article}{}
+      \name{author}{3}{}{%
+        {{hash=643dfbd788f89e01e0d8f3dcfca6a7c8}{%
+           family={Agrawal},
+           familyi={A\bibinitperiod},
+           given={Manindra},
+           giveni={M\bibinitperiod}}}%
+        {{hash=132a91296a099d008b0c152b456ec45a}{%
+           family={Kayal},
+           familyi={K\bibinitperiod},
+           given={Neeraj},
+           giveni={N\bibinitperiod}}}%
+        {{hash=72d1eef2e218521619ddc0b9bebf0b3a}{%
+           family={Saxena},
+           familyi={S\bibinitperiod},
+           given={Nitin},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{36b48090d1990c2c2cdf61dc7f162d7c}
+      \strng{fullhash}{36b48090d1990c2c2cdf61dc7f162d7c}
+      \strng{bibnamehash}{36b48090d1990c2c2cdf61dc7f162d7c}
+      \strng{authorbibnamehash}{36b48090d1990c2c2cdf61dc7f162d7c}
+      \strng{authornamehash}{36b48090d1990c2c2cdf61dc7f162d7c}
+      \strng{authorfullhash}{36b48090d1990c2c2cdf61dc7f162d7c}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annals of mathematics}
+      \field{title}{PRIMES is in P}
+      \field{year}{2004}
+      \field{pages}{781\bibrangedash 793}
+      \range{pages}{13}
+    \endentry
+    \entry{note}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=cdcb8bd9ecde92f9c5614c6e5c45905f}{%
+           family={{Amnon Ta-Shma}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{cdcb8bd9ecde92f9c5614c6e5c45905f}
+      \strng{fullhash}{cdcb8bd9ecde92f9c5614c6e5c45905f}
+      \strng{bibnamehash}{cdcb8bd9ecde92f9c5614c6e5c45905f}
+      \strng{authorbibnamehash}{cdcb8bd9ecde92f9c5614c6e5c45905f}
+      \strng{authornamehash}{cdcb8bd9ecde92f9c5614c6e5c45905f}
+      \strng{authorfullhash}{cdcb8bd9ecde92f9c5614c6e5c45905f}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online; accessed 5-October-2020]}
+      \field{title}{The AKS Algorithm}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb http://www.cs.tau.ac.il/~amnon/Classes/2019-Derandomization/Lectures/Lecture7-AKS-All.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.cs.tau.ac.il/~amnon/Classes/2019-Derandomization/Lectures/Lecture7-AKS-All.pdf
+      \endverb
+    \endentry
+    \entry{bruce1993really}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e7ec7ee3290b72d4a3427a38489b61ae}{%
+           family={Bruce},
+           familyi={B\bibinitperiod},
+           given={JW},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Mathematical Association of America}%
+      }
+      \strng{namehash}{e7ec7ee3290b72d4a3427a38489b61ae}
+      \strng{fullhash}{e7ec7ee3290b72d4a3427a38489b61ae}
+      \strng{bibnamehash}{e7ec7ee3290b72d4a3427a38489b61ae}
+      \strng{authorbibnamehash}{e7ec7ee3290b72d4a3427a38489b61ae}
+      \strng{authornamehash}{e7ec7ee3290b72d4a3427a38489b61ae}
+      \strng{authorfullhash}{e7ec7ee3290b72d4a3427a38489b61ae}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The American mathematical monthly}
+      \field{number}{4}
+      \field{title}{A really trivial proof of the Lucas-Lehmer primality test}
+      \field{volume}{100}
+      \field{year}{1993}
+      \field{pages}{370\bibrangedash 371}
+      \range{pages}{2}
+    \endentry
+    \entry{ve475}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=65314e903461a614229ea5a2099d758e}{%
+           family={Manuel},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{65314e903461a614229ea5a2099d758e}
+      \strng{fullhash}{65314e903461a614229ea5a2099d758e}
+      \strng{bibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorbibnamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authornamehash}{65314e903461a614229ea5a2099d758e}
+      \strng{authorfullhash}{65314e903461a614229ea5a2099d758e}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{VE475 -- Introduction to Cryptography (lecture slides)}
+      \field{year}{2020}
+    \endentry
+    \entry{miller1976riemann}{article}{}
+      \name{author}{1}{}{%
+        {{hash=f885918a750a526f80238c798fd47a9b}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Gary\bibnamedelima L},
+           giveni={G\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{f885918a750a526f80238c798fd47a9b}
+      \strng{fullhash}{f885918a750a526f80238c798fd47a9b}
+      \strng{bibnamehash}{f885918a750a526f80238c798fd47a9b}
+      \strng{authorbibnamehash}{f885918a750a526f80238c798fd47a9b}
+      \strng{authornamehash}{f885918a750a526f80238c798fd47a9b}
+      \strng{authorfullhash}{f885918a750a526f80238c798fd47a9b}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of computer and system sciences}
+      \field{number}{3}
+      \field{title}{Riemann's hypothesis and tests for primality}
+      \field{volume}{13}
+      \field{year}{1976}
+      \field{pages}{300\bibrangedash 317}
+      \range{pages}{18}
+    \endentry
+    \entry{pratt1975every}{article}{}
+      \name{author}{1}{}{%
+        {{hash=068b10476f97392aa59f421bb931fa88}{%
+           family={Pratt},
+           familyi={P\bibinitperiod},
+           given={Vaughan\bibnamedelima R},
+           giveni={V\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{068b10476f97392aa59f421bb931fa88}
+      \strng{fullhash}{068b10476f97392aa59f421bb931fa88}
+      \strng{bibnamehash}{068b10476f97392aa59f421bb931fa88}
+      \strng{authorbibnamehash}{068b10476f97392aa59f421bb931fa88}
+      \strng{authornamehash}{068b10476f97392aa59f421bb931fa88}
+      \strng{authorfullhash}{068b10476f97392aa59f421bb931fa88}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Computing}
+      \field{number}{3}
+      \field{title}{Every prime has a succinct certificate}
+      \field{volume}{4}
+      \field{year}{1975}
+      \field{pages}{214\bibrangedash 220}
+      \range{pages}{7}
+    \endentry
+    \entry{AKS}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=b6aea1a416c89509a7df1cbb69249cb6}{%
+           family={{Wikipedia contributors}},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{bibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorbibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online; accessed 5-October-2020]}
+      \field{title}{AKS primality test}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/AKS_primality_test
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/AKS_primality_test
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

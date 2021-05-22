@@ -1,0 +1,11 @@
+[0] Config.pm:304> INFO - This is Biber 2.14
+[0] Config.pm:307> INFO - Logfile is 'problem-119.blg'
+[106] biber-darwin:322> INFO - === Fri Nov  6, 2020, 23:43:47
+[128] Biber.pm:415> INFO - Reading 'problem-119.bcf'
+[263] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[263] Biber.pm:943> INFO - Found 0 citekeys in bib section 1
+[263] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[278] Utils.pm:304> WARN - The file 'problem-119.bcf' does not contain any citations!
+[289] bbl.pm:652> INFO - Writing 'problem-119.bbl' with encoding 'UTF-8'
+[289] bbl.pm:755> INFO - Output to problem-119.bbl
+[289] Biber.pm:128> INFO - WARNINGS: 1

@@ -1,0 +1,303 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{1}
+  \datalist[entry]{nty/global//global/global}
+    \entry{boutell1997png}{article}{}
+      \name{author}{2}{}{%
+        {{hash=20388e2617730d774bc76b99d94972be}{%
+           family={Boutell},
+           familyi={B\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f41d1e1a0a3301ba6622ab1e42264144}{%
+           family={Lane},
+           familyi={L\bibinitperiod},
+           given={T},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{b57ee91656957827776fcbe66e655756}
+      \strng{fullhash}{b57ee91656957827776fcbe66e655756}
+      \strng{bibnamehash}{b57ee91656957827776fcbe66e655756}
+      \strng{authorbibnamehash}{b57ee91656957827776fcbe66e655756}
+      \strng{authornamehash}{b57ee91656957827776fcbe66e655756}
+      \strng{authorfullhash}{b57ee91656957827776fcbe66e655756}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Network Working Group}
+      \field{title}{Png (portable network graphics) specification version 1.0}
+      \field{year}{1997}
+      \field{pages}{1\bibrangedash 102}
+      \range{pages}{102}
+    \endentry
+    \entry{crocker1995png}{article}{}
+      \name{author}{1}{}{%
+        {{hash=cb1503998d076558e1017f6dd57048f8}{%
+           family={Crocker},
+           familyi={C\bibinitperiod},
+           given={Lee\bibnamedelima Daniel},
+           giveni={L\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Redwood City, CA: M\&T Pub., 1989-}%
+      }
+      \strng{namehash}{cb1503998d076558e1017f6dd57048f8}
+      \strng{fullhash}{cb1503998d076558e1017f6dd57048f8}
+      \strng{bibnamehash}{cb1503998d076558e1017f6dd57048f8}
+      \strng{authorbibnamehash}{cb1503998d076558e1017f6dd57048f8}
+      \strng{authornamehash}{cb1503998d076558e1017f6dd57048f8}
+      \strng{authorfullhash}{cb1503998d076558e1017f6dd57048f8}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Dr Dobb's Journal-Software Tools for the Professional Programmer}
+      \field{number}{7}
+      \field{title}{PNG: The portable network graphic format}
+      \field{volume}{20}
+      \field{year}{1995}
+      \field{pages}{36\bibrangedash 45}
+      \range{pages}{10}
+    \endentry
+    \entry{deutsch1996rfc1951}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=338f27fdc8b38a05612b2cc437107e64}{%
+           family={Deutsch},
+           familyi={D\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{338f27fdc8b38a05612b2cc437107e64}
+      \strng{fullhash}{338f27fdc8b38a05612b2cc437107e64}
+      \strng{bibnamehash}{338f27fdc8b38a05612b2cc437107e64}
+      \strng{authorbibnamehash}{338f27fdc8b38a05612b2cc437107e64}
+      \strng{authornamehash}{338f27fdc8b38a05612b2cc437107e64}
+      \strng{authorfullhash}{338f27fdc8b38a05612b2cc437107e64}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{RFC1951: DEFLATE compressed data format specification version 1.3}
+      \field{year}{1996}
+    \endentry
+    \entry{michaellz77}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d8e033653e1ea8ced6f168d43f3a507e}{%
+           family={Dipperstein},
+           familyi={D\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{d8e033653e1ea8ced6f168d43f3a507e}
+      \strng{fullhash}{d8e033653e1ea8ced6f168d43f3a507e}
+      \strng{bibnamehash}{d8e033653e1ea8ced6f168d43f3a507e}
+      \strng{authorbibnamehash}{d8e033653e1ea8ced6f168d43f3a507e}
+      \strng{authornamehash}{d8e033653e1ea8ced6f168d43f3a507e}
+      \strng{authorfullhash}{d8e033653e1ea8ced6f168d43f3a507e}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{3}
+      \field{title}{LZSS (LZ77) Discussion and Implementation}
+      \field{year}{2015}
+    \endentry
+    \entry{huffman1952method}{article}{}
+      \name{author}{1}{}{%
+        {{hash=778334e2716241a2c1dbc07898e1e989}{%
+           family={Huffman},
+           familyi={H\bibinitperiod},
+           given={David\bibnamedelima A},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{778334e2716241a2c1dbc07898e1e989}
+      \strng{fullhash}{778334e2716241a2c1dbc07898e1e989}
+      \strng{bibnamehash}{778334e2716241a2c1dbc07898e1e989}
+      \strng{authorbibnamehash}{778334e2716241a2c1dbc07898e1e989}
+      \strng{authornamehash}{778334e2716241a2c1dbc07898e1e989}
+      \strng{authorfullhash}{778334e2716241a2c1dbc07898e1e989}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the IRE}
+      \field{number}{9}
+      \field{title}{A method for the construction of minimum-redundancy codes}
+      \field{volume}{40}
+      \field{year}{1952}
+      \field{pages}{1098\bibrangedash 1101}
+      \range{pages}{4}
+    \endentry
+    \entry{colt2016how}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=59f513bba94717413ed9afcb3ac2cbfa}{%
+           family={McAnlis},
+           familyi={M\bibinitperiod},
+           given={Colt},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{59f513bba94717413ed9afcb3ac2cbfa}
+      \strng{fullhash}{59f513bba94717413ed9afcb3ac2cbfa}
+      \strng{bibnamehash}{59f513bba94717413ed9afcb3ac2cbfa}
+      \strng{authorbibnamehash}{59f513bba94717413ed9afcb3ac2cbfa}
+      \strng{authornamehash}{59f513bba94717413ed9afcb3ac2cbfa}
+      \strng{authorfullhash}{59f513bba94717413ed9afcb3ac2cbfa}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{medium.com}
+      \field{month}{4}
+      \field{title}{How PNG Works}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://medium.com/@duhroach/how-png-works-f1174e3cc7b7
+      \endverb
+      \verb{url}
+      \verb https://medium.com/@duhroach/how-png-works-f1174e3cc7b7
+      \endverb
+    \endentry
+    \entry{1991Image}{book}{}
+      \name{author}{1}{}{%
+        {{hash=56a943090ea2689f166e89e2e388c852}{%
+           family={Paeth},
+           familyi={P\bibinitperiod},
+           given={Alan\bibnamedelima W.},
+           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{56a943090ea2689f166e89e2e388c852}
+      \strng{fullhash}{56a943090ea2689f166e89e2e388c852}
+      \strng{bibnamehash}{56a943090ea2689f166e89e2e388c852}
+      \strng{authorbibnamehash}{56a943090ea2689f166e89e2e388c852}
+      \strng{authornamehash}{56a943090ea2689f166e89e2e388c852}
+      \strng{authorfullhash}{56a943090ea2689f166e89e2e388c852}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{12}
+      \field{title}{Image file compression made easy}
+      \field{year}{1991}
+    \endentry
+    \entry{storer1982data}{article}{}
+      \name{author}{2}{}{%
+        {{hash=9fec20c96fd553fda8024039369eb704}{%
+           family={Storer},
+           familyi={S\bibinitperiod},
+           given={James\bibnamedelima A},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=2fad3c64ad2dc4c8088ffb6c5a0aa9ff}{%
+           family={Szymanski},
+           familyi={S\bibinitperiod},
+           given={Thomas\bibnamedelima G},
+           giveni={T\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {ACM New York, NY, USA}%
+      }
+      \strng{namehash}{8e8c70febb40b45dd7efc018c8d114d6}
+      \strng{fullhash}{8e8c70febb40b45dd7efc018c8d114d6}
+      \strng{bibnamehash}{8e8c70febb40b45dd7efc018c8d114d6}
+      \strng{authorbibnamehash}{8e8c70febb40b45dd7efc018c8d114d6}
+      \strng{authornamehash}{8e8c70febb40b45dd7efc018c8d114d6}
+      \strng{authorfullhash}{8e8c70febb40b45dd7efc018c8d114d6}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the ACM (JACM)}
+      \field{number}{4}
+      \field{title}{Data compression via textual substitution}
+      \field{volume}{29}
+      \field{year}{1982}
+      \field{pages}{928\bibrangedash 951}
+      \range{pages}{24}
+    \endentry
+    \entry{W3CPNG}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=446a1ae6601a5c59360c7d591c3992da}{%
+           family={W3C},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{446a1ae6601a5c59360c7d591c3992da}
+      \strng{fullhash}{446a1ae6601a5c59360c7d591c3992da}
+      \strng{bibnamehash}{446a1ae6601a5c59360c7d591c3992da}
+      \strng{authorbibnamehash}{446a1ae6601a5c59360c7d591c3992da}
+      \strng{authornamehash}{446a1ae6601a5c59360c7d591c3992da}
+      \strng{authorfullhash}{446a1ae6601a5c59360c7d591c3992da}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{11}
+      \field{title}{Portable Network Graphics (PNG) Specification (Second Edition)}
+      \field{year}{2003}
+      \verb{urlraw}
+      \verb https://www.w3.org/TR/PNG/
+      \endverb
+      \verb{url}
+      \verb https://www.w3.org/TR/PNG/
+      \endverb
+    \endentry
+    \entry{ziv1977universal}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a17ac44c358b0b889cd034a7c7e0d1e7}{%
+           family={Ziv},
+           familyi={Z\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9ec428e0d60131cb1733175cf93a46d1}{%
+           family={Lempel},
+           familyi={L\bibinitperiod},
+           given={Abraham},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{4abf7673428f07d8f3dd2569c335b6a5}
+      \strng{fullhash}{4abf7673428f07d8f3dd2569c335b6a5}
+      \strng{bibnamehash}{4abf7673428f07d8f3dd2569c335b6a5}
+      \strng{authorbibnamehash}{4abf7673428f07d8f3dd2569c335b6a5}
+      \strng{authornamehash}{4abf7673428f07d8f3dd2569c335b6a5}
+      \strng{authorfullhash}{4abf7673428f07d8f3dd2569c335b6a5}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on information theory}
+      \field{number}{3}
+      \field{title}{A universal algorithm for sequential data compression}
+      \field{volume}{23}
+      \field{year}{1977}
+      \field{pages}{337\bibrangedash 343}
+      \range{pages}{7}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
